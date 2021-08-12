@@ -14,6 +14,10 @@ public class Cart {
     private float shippingPrice;
     private float totalPrice;
 
+    public Map<Item, Integer> getItems() {
+        return items;
+    }
+
     public float getItemsPrice() {
         return itemsPrice;
     }
