@@ -16,15 +16,18 @@ public class MainClass {
         carrito.addItem(silla,5);
         carrito.addItem(silla,2);
 
+        Cart carrito2 = new Cart();
+        carrito2.addItem(carrito,2);
 
+        carrito2.setShippingPrice(425.50f);
 
-        carrito.setShippingPrice(425.50f);
-
-        carrito.showCart();
+        System.out.println(" total = " + carrito2.getTotalPrice());
 
         carrito.deleteItem(silla);
 
-        carrito.showCart();
+        System.out.println(" total = " + carrito2.getTotalPrice());
+
+
     }
 
 }

@@ -1,30 +1,23 @@
 package model.cart;
 
 import model.item.Item;
+import model.item.Precio;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class Cart {
+public class Cart implements Precio {
 
     //item,cantidad
-    private Map<Item,Integer> items;
-    private float itemsPrice;
+    private List<Precio> items;
     private float shippingPrice;
-    private float totalPrice;
 
-    public Map<Item, Integer> getItems() {
+
+    public  List<Precio> getItems() {
         return items;
-    }
-
-    public float getItemsPrice() {
-        return itemsPrice;
     }
 
     public void setShippingPrice(float shippingPrice) {
         this.shippingPrice = shippingPrice;
-        updatePrices();
     }
 
     public float getShippingPrice() {
@@ -32,14 +25,17 @@ public class Cart {
     }
 
     public float getTotalPrice() {
-        return totalPrice;
+
+        return obtenerPrecio() + shippingPrice;
+
     }
 
     public Cart() {
-        items = new HashMap<>();
+        items = new ArrayList<>();
 
     }
 
+    /*
     public void showCart(){
         System.out.println("\u001B[35m" +"-------------------------- Articulos --------------------------");
 
@@ -62,32 +58,25 @@ public class Cart {
         System.out.println("Total articulos:    $" + itemsPrice);
         System.out.println("Precio Final:       $" + totalPrice);
         System.out.println("\u001B[0m");
-    }
+    }*/
 
-    public void addItem(Item item,int cantidad){
-
-        if ( items.containsKey(item) ){
-            int old = items.get(item);
-            items.replace(item, old + cantidad);
-        }else{
-            items.put(item,cantidad);
+    public void addItem(Precio item,int cantidad){
+        for(int i =0; i<cantidad ; i++){
+            items.add(item);
         }
 
-        updatePrices();
-
     }
 
-    public void deleteItem(Item item){
+    public void deleteItem(Precio item){
         items.remove(item);
-        updatePrices();
     }
 
-    private void updatePrices(){
-        itemsPrice = 0;
-        items.forEach( (i,c) ->
-                itemsPrice += i.getPrice()*c
-        );
-
-        totalPrice = itemsPrice + shippingPrice;
+    @Override
+    public float obtenerPrecio() {
+        float  retorno = 0;
+        for (Precio item : items) {
+            retorno += item.obtenerPrecio();
+        }
+        return retorno;
     }
 }

@@ -1,6 +1,6 @@
 package model.item;
 
-public class Item {
+public class Item implements Precio {
 
     private String name;
     private String brand;
@@ -15,10 +15,6 @@ public class Item {
         return description;
     }
 
-    public float getPrice() {
-        return price;
-    }
-
     public String getName() {
         return name;
     }
@@ -31,4 +27,8 @@ public class Item {
     }
 
 
+    @Override
+    public float obtenerPrecio() {
+        return price;
+    }
 }
