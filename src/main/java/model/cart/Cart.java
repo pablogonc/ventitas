@@ -37,7 +37,7 @@ public class Cart {
     }
 
     public void showCart(){
-        System.out.println("-------------------------- Articulos --------------------------");
+        System.out.println("\u001B[35m" +"-------------------------- Articulos --------------------------");
 
         System.out.println(
                 String.format("%-20s", "Articulo")
@@ -57,6 +57,7 @@ public class Cart {
         System.out.println("Precio de envio:    $" + shippingPrice);
         System.out.println("Total articulos:    $" + itemsPrice);
         System.out.println("Precio Final:       $" + totalPrice);
+        System.out.println("\u001B[0m");
     }
 
     public void addItem(Item item,int cantidad){
