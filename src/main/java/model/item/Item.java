@@ -1,5 +1,8 @@
 package model.item;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Item implements Precio {
 
     private String name;
@@ -30,5 +33,12 @@ public class Item implements Precio {
     @Override
     public float obtenerPrecio() {
         return price;
+    }
+
+    @Override
+    public List<Item> obtenerItems() {
+        List<Item> items = new ArrayList<>();
+        items.add(this);
+        return items;
     }
 }

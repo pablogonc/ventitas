@@ -3,6 +3,7 @@ package model.store;
 import model.item.Item;
 import model.order.Order;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
 public class Store {
     private Integer id;
     private String address;
-    private String manager;
+    private String manager; //todo cambiarlo a un admin
     private Integer telephone;
     private Map<Item,Integer> stock;
     private List<Order> orders;
@@ -21,7 +22,9 @@ public class Store {
         this.manager = manager;
         this.telephone = telephone;
         this.stock = new HashMap<>();
+        this.orders = new ArrayList<>();
     }
+
     private void agregarArticulo(Item item, Integer cantidad){
         if(stock.containsKey(item)){
             int old = stock.get(item);

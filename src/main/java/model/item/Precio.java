@@ -1,5 +1,8 @@
 package model.item;
 
+import java.util.List;
+
 public interface Precio {
-    public float obtenerPrecio();
+    float obtenerPrecio();
+    List<Item> obtenerItems();
 }

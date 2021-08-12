@@ -1,5 +1,6 @@
 import model.cart.Cart;
 import model.item.Item;
+import model.order.Order;
 
 public class MainClass {
 
@@ -18,14 +19,16 @@ public class MainClass {
 
         Cart carrito2 = new Cart();
         carrito2.addItem(carrito,2);
+        carrito2.addItem(silla,2);
 
-        carrito2.setShippingPrice(425.50f);
+        Order order = carrito2.confirmarCarrito(200F);
+        order.showOrder();
 
-        System.out.println(" total = " + carrito2.getTotalPrice());
+        System.out.println(" total = " + carrito2.obtenerPrecio());
 
-        carrito.deleteItem(silla);
+        carrito2.deleteItem(carrito);
 
-        System.out.println(" total = " + carrito2.getTotalPrice());
+        System.out.println(" total = " + carrito2.obtenerPrecio());
 
 
     }
