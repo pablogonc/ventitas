@@ -1,13 +1,17 @@
 package model.user;
 
+import Apis.Notificar;
 import noseque.Sesion;
 
 public class Normal extends Usuario{
+
+    private Notificar notificar;
 
 
     public Normal(Sesion sesion, String nombre ) {
         super(sesion);
         this.setNombre(nombre);
+
     }
 
     @Override

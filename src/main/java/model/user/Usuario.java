@@ -1,18 +1,20 @@
 package model.user;
 
-import model.item.Precio;
+import model.item.Producto;
+import model.store.Ubicacion;
 import noseque.Sesion;
 
 public abstract class Usuario {
     private Sesion sesion;
     private Integer id;
     private String nombre;
-    private String ubicacion;
+    private Ubicacion ubicacion;
+    private Integer telefono;
+    private String mail;
 
     public Usuario(Sesion sesion) {
         this.sesion = sesion;
     }
-
 
     public Sesion getSesion() {
         return sesion;
@@ -48,7 +50,7 @@ public abstract class Usuario {
         sesion.getSucursal().mostrarCatalogo();
     }
 
-    public void agregarAlCarro(Precio item, int cantidad){
+    public void agregarAlCarro(Producto item, int cantidad){
         sesion.getCarrito().addItem(item, cantidad);
     }
 

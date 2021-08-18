@@ -12,16 +12,16 @@ import java.util.Map;
 public class Store {
     private Integer id;
     private Ubicacion ubicacion;
-    private String manager; //todo cambiarlo a un admin
-    private Integer telephone;
+    private String manager;       //todo cambiarlo a un admin
+    private Integer telefono;
     private Map<Producto,Integer> stock;
     private List<Order> orders;
 
-    public Store(Integer id, Ubicacion ubicacion, String manager, Integer telephone){
+    public Store(Integer id, Ubicacion ubicacion, String manager, Integer telefono){
         this.id = id;
         this.ubicacion = ubicacion;
         this.manager = manager;
-        this.telephone = telephone;
+        this.telefono = telefono;
         this.stock = new HashMap<>();
         this.orders = new ArrayList<>();
     }
@@ -40,14 +40,15 @@ public class Store {
 
     }
 
-    private void eliminarArticulo(Producto item){
+    public void eliminarArticulo(Producto item){
         if(stock.containsKey(item)){
             stock.remove(item);
         } else {
             System.out.println("No se pudo eliminar el item");
         }
     }
-    private void actualizarStock(Producto item, Integer cantidad){
+
+    public void actualizarStock(Producto item, Integer cantidad){
         if(stock.containsKey(item)){
             stock.replace(item, cantidad);
         }else{
@@ -60,8 +61,9 @@ public class Store {
         stock.forEach( (item,cantidad) -> System.out.println("Articulo: " + item.getNombre() + " Precio: $" + item.getPrecio() +" Stock: " + cantidad));
     }
 
-    public Float getPrecioEnvio(String ubicacion) {
-        return 250f; //todo calcular y cambiar la ubicacion quiza por un objeto
+    public Float getPrecioEnvio(Ubicacion ubicacionUsuario) {
+        Double distancia = (this.ubicacion.obtenerDistanciaA(ubicacionUsuario));
+        return distancia.floatValue()*20;  //TODO ver si pasarlo por variable
     }
 
     public Ubicacion getUbicacion() {

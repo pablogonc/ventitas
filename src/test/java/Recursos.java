@@ -1,6 +1,5 @@
 import model.item.Articulo;
 import model.item.Combo;
-import model.item.Item;
 import model.store.Store;
 import model.store.Ubicacion;
 

@@ -1,7 +1,7 @@
 package model.order;
 
 import model.cart.Cart;
-import model.item.Item;
+import model.item.Producto;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Order {
-    private List<Item> items;
+    private List<Producto> items;
     private Float precio;
     private Float shippingPrice;
     private LocalDateTime fechaPedido;
@@ -38,10 +38,10 @@ public class Order {
         items.stream().distinct().collect(Collectors.toList()).forEach((item) ->
 
                 System.out.println(
-                        String.format("%-20s", item.getName())
+                        String.format("%-20s", item.getNombre())
                                 + String.format("%-15s",("x"+ Collections.frequency(items,item)))
-                                + String.format("%-15s",("$"+item.obtenerPrecio()))
-                                + String.format("%-15s", ("$" + (item.obtenerPrecio() * Collections.frequency(items,item))))
+                                + String.format("%-15s",("$"+item.getPrecio()))
+                                + String.format("%-15s", ("$" + (item.getPrecio() * Collections.frequency(items,item))))
                 ));
         System.out.println("--------------------------- Totales ---------------------------");
         System.out.println("Precio de envio:    $" + shippingPrice);
