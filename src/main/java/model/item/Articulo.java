@@ -1,5 +1,8 @@
 package model.item;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Articulo implements Producto{
     private String nombre;
     private String marca;
@@ -21,5 +24,13 @@ public class Articulo implements Producto{
     @Override
     public String getNombre() {
         return "\u001b[36m" + nombre + "\u001b[0m";
+    }
+
+    @Override
+    public List<Articulo> getArticulos() {
+        List<Articulo> articulo = new ArrayList<>();
+        articulo.add(this);
+        return articulo;
+
     }
 }

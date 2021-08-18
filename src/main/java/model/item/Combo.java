@@ -27,10 +27,9 @@ public class Combo implements Producto{
         float precio =0f;
 
         for (Producto producto : productos) {
-            precio += producto.getPrecio();
+            precio += producto.getPrecio() * (100-descuento)/100f;
         }
 
-        precio = precio * (100-descuento)/100f;
 
         return precio;
     }
@@ -50,5 +49,14 @@ public class Combo implements Producto{
 
         nombre.append("\u001b[0m)");
         return nombre.toString();
+    }
+
+    @Override
+    public List<Articulo> getArticulos() {
+        List<Articulo> articulos = new ArrayList<>();
+        for (Producto producto : productos) {
+            articulos.addAll(producto.getArticulos());
+        }
+        return articulos;
     }
 }

@@ -1,5 +1,6 @@
 package model.store;
 
+import model.item.Articulo;
 import model.item.Producto;
 import model.order.Order;
 
@@ -26,12 +27,17 @@ public class Store {
     }
 
     public void agregarArticulo(Producto item, Integer cantidad){
-        if(stock.containsKey(item)){
-            int old = stock.get(item);
-            stock.replace(item, old + cantidad);
-        }else{
-            stock.put(item,cantidad);
-        }
+
+       // for (Articulo articulo : item.getArticulos()) {
+            if(stock.containsKey(item)){
+                int old = stock.get(item);
+                stock.replace(item, old + cantidad);
+            }else{
+                stock.put(item,cantidad);
+            }
+        //}
+
+
     }
 
     private void eliminarArticulo(Producto item){
@@ -51,8 +57,7 @@ public class Store {
     }
 
     public void mostrarCatalogo() {
-        stock.forEach( (item,cantidad) -> System.out.println("Articulo: " + item.getNombre() + " Precio: " + item.getPrecio() +" Stock: " + cantidad)
-        );
+        stock.forEach( (item,cantidad) -> System.out.println("Articulo: " + item.getNombre() + " Precio: $" + item.getPrecio() +" Stock: " + cantidad));
     }
 
     public Float getPrecioEnvio(String ubicacion) {

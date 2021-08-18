@@ -58,7 +58,7 @@ public class Recursos {
 
     public void iniciarSucursales(){ //todo
         Ubicacion medrano= new Ubicacion("Av. Medrano 951, C1179 AAQ, Buenos Aires",-34.59859412721525d ,-58.41992119079607d );
-        sucursalMEdrano = new Store(1,medrano,"Roberto",4523);
+        sucursalMEdrano = new Store(1,medrano,"Roberto",1148677500);
 
         sucursalMEdrano.agregarArticulo(consola,1);
         sucursalMEdrano.agregarArticulo(homeTheather,1);
@@ -66,17 +66,17 @@ public class Recursos {
         sucursalMEdrano.agregarArticulo(controlConsola,1);
         sucursalMEdrano.agregarArticulo(sillon,1);
 
-        sucursalMEdrano.agregarArticulo(comboJuego,1);
+        sucursalMEdrano.agregarArticulo(comboJuego,3);
         sucursalMEdrano.agregarArticulo(comboCine,1);
         sucursalMEdrano.agregarArticulo(comboLiving,1);
 
         Ubicacion mozart = new Ubicacion("Mozart 2300, C1407 CABA",-34.65927096597888d ,-58.4673399745992d );
-        sucursalMozart = new Store(1,mozart,"Juan",345345);
+        sucursalMozart = new Store(1,mozart,"Juan",1148677500);
     }
 
     public void iniciarArticulos(){
         tv = new Articulo("Tele 50\"","Philips ","Smart TV Philips 50\" 4K 50PUD6654 posee: Diseño sin bordes, menos marco, escenas más amplias - Bases delgadas y refinadas, transmiten liviandad - Pixel Precise Ultra HD, movimiento fluido y profundidad visible - Compatible con HDR10+ - Dolby Vision y Dolby Atmos, para imagen y sonido cinematográfico - SAPHI, la forma más inteligente de disfrutar de tu televisor - Acceso con un solo botón a un menú de íconos sencillos- Bluetooth para que puedas conectar tus dispositivos compatibles - Colección Philips TV: Netflix, Prime Video y mucho más - Sonido nítido de parlantes de rango completo - Graves potentes.", 72.999f);
-        homeTheather = new Articulo("home Theather","Logitech ","Sistema multicanal",18.613f);
+        homeTheather = new Articulo("home Theather","Logitech ","Sistema multicanal",40.613f);
 
         comboCine = new Combo("Combo cine",25); //combo cine = tv + homeTheather
         comboCine.agregarProducto(tv);
@@ -86,7 +86,7 @@ public class Recursos {
         controlConsola = new Articulo("Dualshock 4","sony","control",10.397f);
         juego = new Articulo("Uncharted 4","Naughty Dog","para ps4",2.299f);
 
-        comboJuego = new Combo("Combo Juego",15);//combo juego = consola+control+juego
+        comboJuego = new Combo("Combo Juego",5);//combo juego = consola+control+juego
         comboJuego.agregarProducto(consola);
         comboJuego.agregarProducto(controlConsola);
         comboJuego.agregarProducto(juego);
