@@ -1,14 +1,13 @@
 package model.user;
 
 import model.item.Producto;
-import model.store.Ubicacion;
+import model.order.Order;
 import noseque.Sesion;
 
 public abstract class Usuario {
     private Sesion sesion;
     private Integer id;
     private String nombre;
-    private Ubicacion ubicacion;
     private Integer telefono;
     private String mail;
 
@@ -40,7 +39,7 @@ public abstract class Usuario {
         this.nombre = nombre;
     }
 
-    public abstract void iniciarSesion(String nombre );
+    public abstract void iniciarSesion(String nombre,String contrasenia );
 
     public abstract void cerrarSesion();
 
@@ -54,13 +53,14 @@ public abstract class Usuario {
         sesion.getCarrito().addItem(item, cantidad);
     }
 
-    public void confirmarCarrito(){
-        sesion.getCarrito().confirmarCarrito( sesion.getSucursal().getPrecioEnvio(ubicacion) );
-    }
+    public abstract void confirmarCarrito();
 
     public abstract void verEstadoPedido();
 
     public abstract void cancelarPedido();
 
     public abstract void confirmarPedido();
+
+    public abstract Order getOrden();
+
 }

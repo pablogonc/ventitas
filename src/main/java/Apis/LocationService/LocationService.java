@@ -1,6 +1,7 @@
 package Apis.LocationService;
 
 import Apis.LocationService.dto.LocationResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.store.Ubicacion;
@@ -12,7 +13,7 @@ import javax.ws.rs.core.Response;
 
 public class LocationService {
 
-    public Ubicacion getUbicacion(String direccion) throws Exception {
+    public static Ubicacion getUbicacion(String direccion) {
 
         WebClient client = WebClient.create("https://geocode.search.hereapi.com/v1/geocode");
 
@@ -31,14 +32,21 @@ public class LocationService {
         String responseBody = response.readEntity(String.class);
         switch (status){
             case 200:
-                return  objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false).readValue(responseBody, LocationResponse.class).detalles.get(0).getubicacion();
+                try {
+                    return  objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false).readValue(responseBody, LocationResponse.class).getubicacion();
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
 
             case 400:
-                throw new Exception("Error: offset no valido");
+                return null;
+               // throw new Exception("Error: offset no valido");
             case 401:
-                throw new Exception("Error: acceso no autorizado");
+                return null;
+                //throw new Exception("Error: acceso no autorizado");
             default:
-                throw new Exception("Error en la llamada a /api/hogares");
+                return null;
+                //throw new Exception("Error en la llamada a /api/hogares");
         }
 
     }

@@ -1,5 +1,6 @@
 package model.user;
 
+import model.order.Order;
 import noseque.Sesion;
 
 public class Anonimo extends Usuario {
@@ -9,11 +10,11 @@ public class Anonimo extends Usuario {
     }
 
     private void solicitarInicioDeSesion(){
-        System.out.println("\u001b[31mPara poder realizar esta accion, antes debe iniciar Sesion");
+        System.out.println("\u001b[31mPara poder realizar esta accion, antes debe iniciar Sesion\u001b[0m");
     }
 
     @Override
-    public void iniciarSesion(String nombre ) {
+    public void iniciarSesion(String nombre,String contrasenia ) {
         getSesion().setUsuario(new Normal(getSesion(),nombre));
     }
 
@@ -45,5 +46,10 @@ public class Anonimo extends Usuario {
     @Override
     public void confirmarPedido() {
         solicitarInicioDeSesion();
+    }
+
+    @Override
+    public Order getOrden() {
+        return null;
     }
 }

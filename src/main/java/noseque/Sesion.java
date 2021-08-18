@@ -5,6 +5,8 @@ import model.store.Store;
 import model.user.Anonimo;
 import model.user.Usuario;
 
+import java.util.ArrayList;
+
 public class Sesion {
     Store sucursal;
     Cart carrito;
@@ -13,6 +15,7 @@ public class Sesion {
     public Sesion(Store sucursal) {
         this.sucursal = sucursal;
         this.usuario = new Anonimo(this);
+        carrito = new Cart();
     }
 
     public Store getSucursal() {
@@ -21,6 +24,10 @@ public class Sesion {
 
     public void setSucursal(Store sucursal) {
         this.sucursal = sucursal;
+    }
+
+    public void confirmarCarrito(){
+
     }
 
     public Cart getCarrito() {

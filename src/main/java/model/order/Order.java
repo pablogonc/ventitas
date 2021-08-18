@@ -2,6 +2,7 @@ package model.order;
 
 import model.cart.Cart;
 import model.item.Producto;
+import model.store.Ubicacion;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,19 +15,25 @@ public class Order {
     private Float precio;
     private Float shippingPrice;
     private LocalDateTime fechaPedido;
+    private Ubicacion destino;
     private Boolean confirmado;
 
-    public Order(Cart carrito, Float shippingPrice){
+    public Order(Cart carrito, Float shippingPrice, Ubicacion destino){
         this.items = carrito.obtenerItems();
         this.precio = carrito.obtenerPrecio();
         this.shippingPrice = shippingPrice;
+        this.destino = destino;
         DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         this.fechaPedido = LocalDateTime.now();
         // todo calcular envio
     }
 
     public void showOrder(){
-        System.out.println("\u001b[36mFecha del pedido:       " + fechaPedido);
+        System.out.println(
+                String.format("%-29s", "\u001b[36mFecha del pedido:") + fechaPedido
+                +  String.format("%-30s", "\n\u001b[36mDestino:")+ destino.getDireccion()
+        );
+
         System.out.println("\u001B[35m" +"-------------------------- Artículos --------------------------");
 
         System.out.println(
@@ -38,7 +45,7 @@ public class Order {
         items.stream().distinct().collect(Collectors.toList()).forEach((item) ->
 
                 System.out.println(
-                        String.format("%-20s", item.getNombre())
+                        String.format("%-29s", item.getNombre())
                                 + String.format("%-15s",("x"+ Collections.frequency(items,item)))
                                 + String.format("%-15s",("$"+item.getPrecio()))
                                 + String.format("%-15s", ("$" + (item.getPrecio() * Collections.frequency(items,item))))

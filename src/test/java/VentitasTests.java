@@ -1,5 +1,6 @@
 import Apis.LocationService.LocationService;
 import model.store.Ubicacion;
+import noseque.Sesion;
 import org.junit.Test;
 
 public class VentitasTests extends Recursos {
@@ -16,21 +17,36 @@ public class VentitasTests extends Recursos {
     {
         iniciarArticulos();
         iniciarSucursales();
-        System.out.println("la distancia entre las facus es de " + String.format("%.2f",sucursalMEdrano.getUbicacion().obtenerDistanciaA(sucursalMozart.getUbicacion())) + "km");
 
         sucursalMEdrano.mostrarCatalogo();
+    }
 
-        //System.out.println(comboLiving.getNombre());
+    @Test
+    public void apiLocation() {
+
+        Ubicacion ubicacion = LocationService.getUbicacion("Mozart 2300");
+
+        assert ubicacion != null;
+        System.out.println(ubicacion.getDireccion());
 
     }
+
     @Test
-    public void apiLocation() throws Exception {
-        LocationService ls = new LocationService();
+    public void usuarios() {
+        iniciarArticulos();
+        iniciarSucursales();
 
+        Sesion sesion = new Sesion(sucursalMEdrano);
 
-        Ubicacion ubicacion = ls.getUbicacion("Mozart 2300");
-        System.out.println("Direccion:" + ubicacion.getDireccion());
-        System.out.println("latitud:" + ubicacion.getLatitud());
-        System.out.println("longitud:" + ubicacion.getLongitud());
+        //sesion.getSucursal().mostrarCatalogo();
+
+        sesion.getCarrito().addItem(consola,1);
+
+        sesion.getUsuario().iniciarSesion("juan","sad");
+
+        sesion.getUsuario().confirmarCarrito();
+
+        sesion.getUsuario().getOrden().showOrder();
+
     }
 }

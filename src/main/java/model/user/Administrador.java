@@ -1,5 +1,6 @@
 package model.user;
 
+import model.order.Order;
 import noseque.Sesion;
 
 public class Administrador extends Usuario{
@@ -10,7 +11,7 @@ public class Administrador extends Usuario{
     }
 
     @Override
-    public void iniciarSesion(String nombre ) {
+    public void iniciarSesion(String nombre,String contrasenia ) {
 
     }
 
@@ -21,6 +22,11 @@ public class Administrador extends Usuario{
 
     @Override
     public void verSaldo() {
+
+    }
+
+    @Override
+    public void confirmarCarrito() {
 
     }
 
@@ -37,5 +43,10 @@ public class Administrador extends Usuario{
     @Override
     public void confirmarPedido() {
 
+    }
+
+    @Override
+    public Order getOrden() {
+        return null;
     }
 }

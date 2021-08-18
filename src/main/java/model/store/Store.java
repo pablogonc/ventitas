@@ -62,8 +62,8 @@ public class Store {
     }
 
     public Float getPrecioEnvio(Ubicacion ubicacionUsuario) {
-        Double distancia = (this.ubicacion.obtenerDistanciaA(ubicacionUsuario));
-        return distancia.floatValue()*20;  //TODO ver si pasarlo por variable
+        double distancia = (this.ubicacion.obtenerDistanciaA(ubicacionUsuario));
+        return Math.round((float) distancia *20*100f)/100f;  //TODO ver si pasarlo por variable
     }
 
     public Ubicacion getUbicacion() {

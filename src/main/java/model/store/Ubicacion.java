@@ -48,9 +48,8 @@ public class Ubicacion {
 
         double distanciaLat = radianes(latitud) - radianes(ubicacion.getLatitud());
         double distanciaLong = radianes(longitud) - radianes(ubicacion.getLongitud());
-
-        return  2 *Math.asin(Math.sqrt(Math.pow(Math.sin(distanciaLat/2),2)+Math.cos(radianes(latitud))*Math.cos(radianes(ubicacion.getLatitud()))*Math.pow(Math.sin(distanciaLong/2),2)))* 6378137 /1000;
-
+        double distancia = 2 *Math.asin(Math.sqrt(Math.pow(Math.sin(distanciaLat/2),2)+Math.cos(radianes(latitud))*Math.cos(radianes(ubicacion.getLatitud()))*Math.pow(Math.sin(distanciaLong/2),2)))* 6378137 /1000 ;
+        return Math.round(distancia*100.0)/100.0;
 
     }
 
