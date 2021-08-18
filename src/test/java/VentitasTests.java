@@ -3,6 +3,9 @@ import model.store.Ubicacion;
 import noseque.Sesion;
 import org.junit.Test;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class VentitasTests extends Recursos {
 
     @Test
@@ -33,6 +36,7 @@ public class VentitasTests extends Recursos {
 
     @Test
     public void usuarios() {
+
         iniciarArticulos();
         iniciarSucursales();
 
