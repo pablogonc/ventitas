@@ -30,8 +30,8 @@ public class Order {
 
     public void showOrder(){
         System.out.println(
-                String.format("%-29s", "\u001b[36mFecha del pedido:") + fechaPedido
-                +  String.format("%-30s", "\n\u001b[36mDestino:")+ destino.getDireccion()
+                String.format("%-30s", "Fecha del pedido:") + "\u001b[36m" + fechaPedido +"\n\u001b[0m"
+                +  String.format("%-30s", "Destino:")+ "\u001b[36m" + destino.getDireccion()
         );
 
         System.out.println("\u001B[35m" +"-------------------------- Artículos --------------------------");
