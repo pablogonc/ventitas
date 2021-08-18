@@ -41,6 +41,9 @@ public class VentitasTests extends Recursos {
         //sesion.getSucursal().mostrarCatalogo();
 
         sesion.getCarrito().addItem(consola,1);
+        sesion.getCarrito().addItem(tv,1);
+        sesion.getCarrito().addItem(notebook,1);
+        sesion.getCarrito().addItem(controlConsola,2);
 
         sesion.getUsuario().iniciarSesion("juan","sad");
 
