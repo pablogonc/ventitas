@@ -4,6 +4,7 @@ import model.cart.Cart;
 import model.item.Producto;
 import model.store.Ubicacion;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -29,6 +30,9 @@ public class Order {
     }
 
     public void showOrder(){
+
+        DecimalFormat formatter = new DecimalFormat("#,###.00");
+
         System.out.println(
                 String.format("%-30s", "Fecha del pedido:") + "\u001b[36m" + fechaPedido +"\n\u001b[0m"
                 +  String.format("%-30s", "Destino:")+ "\u001b[36m" + destino.getDireccion()
@@ -47,13 +51,13 @@ public class Order {
                 System.out.println(
                         String.format("%-29s", item.getNombre())
                                 + String.format("%-15s",("x"+ Collections.frequency(items,item)))
-                                + String.format("%-15s",("$"+item.getPrecio()))
-                                + String.format("%-15s", ("$" + (item.getPrecio() * Collections.frequency(items,item))))
+                                + String.format("%-15s",("$"+ formatter.format(item.getPrecio())))
+                                + String.format("%-15s", ("$" +    formatter.format((item.getPrecio() * Collections.frequency(items,item)))  ))
                 ));
         System.out.println("--------------------------- Totales ---------------------------");
-        System.out.println("Precio de envio:    $" + shippingPrice);
-        System.out.println("Total artículos:    $" + precio);
-        System.out.println("Precio Final:       $" + (precio+shippingPrice));
+        System.out.println("Precio de envio:    $" +  formatter.format(shippingPrice));
+        System.out.println("Total artículos:    $" +  formatter.format(precio));
+        System.out.println("Precio Final:       $" +  formatter.format((precio+shippingPrice)));
         System.out.println("\u001B[0m");
     }
 
