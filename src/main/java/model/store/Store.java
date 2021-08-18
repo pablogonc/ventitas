@@ -1,6 +1,7 @@
 package model.store;
 
 import model.item.Item;
+import model.item.Producto;
 import model.order.Order;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class Store {
     private String address;
     private String manager; //todo cambiarlo a un admin
     private Integer telephone;
-    private Map<Item,Integer> stock;
+    private Map<Producto,Integer> stock;
     private List<Order> orders;
 
     public Store(Integer id, String address, String manager, Integer telephone){
@@ -25,7 +26,7 @@ public class Store {
         this.orders = new ArrayList<>();
     }
 
-    private void agregarArticulo(Item item, Integer cantidad){
+    public void agregarArticulo(Producto item, Integer cantidad){
         if(stock.containsKey(item)){
             int old = stock.get(item);
             stock.replace(item, old + cantidad);
@@ -34,14 +35,14 @@ public class Store {
         }
     }
 
-    private void eliminarArticulo(Item item){
+    private void eliminarArticulo(Producto item){
         if(stock.containsKey(item)){
             stock.remove(item);
         } else {
             System.out.println("No se pudo eliminar el item");
         }
     }
-    private void actualizarStock(Item item,Integer cantidad){
+    private void actualizarStock(Producto item, Integer cantidad){
         if(stock.containsKey(item)){
             stock.replace(item, cantidad);
         }else{
@@ -50,4 +51,12 @@ public class Store {
         }
     }
 
+    public void mostrarCatalogo() {
+        stock.forEach( (item,cantidad) -> System.out.println("Articulo: " + item.getNombre() + " Precio: " + item.getPrecio())
+        );
+    }
+
+    public Float getPrecioEnvio(String ubicacion) {
+        return 250f; //todo calcular y cambiar la ubicacion quiza por un objeto
+    }
 }

@@ -22,7 +22,7 @@ public class Item implements Precio {
         return name;
     }
 
-    public Item(String name, String brand, String description,float price){
+    public Item(String name, String brand, String description, float price){
         this.name = name;
         this.brand = brand;
         this.description = description;

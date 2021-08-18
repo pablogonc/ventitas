@@ -1,15 +1,22 @@
-import model.cart.Cart;
-import model.item.Item;
 import org.junit.Test;
 
-public class VentitasTests {
+public class VentitasTests extends Recursos {
 
     @Test
     public void testCart()
     {
 
 
+    }
 
+    @Test
+    public void productos()
+    {
+        iniciarArticulos();
+        iniciarSucursales();
+        sucursalMEdrano.mostrarCatalogo();
+
+       // System.out.println(comboLiving.getNombre());
 
     }
 

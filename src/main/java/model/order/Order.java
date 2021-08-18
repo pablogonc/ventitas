@@ -2,13 +2,10 @@ package model.order;
 
 import model.cart.Cart;
 import model.item.Item;
-import model.item.Precio;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
