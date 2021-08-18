@@ -14,7 +14,7 @@ public class VentitasTests extends Recursos {
     {
         iniciarArticulos();
         iniciarSucursales();
-        sucursalMEdrano.mostrarCatalogo();
+        System.out.println("la distancia entre las facus es de " + String.format("%.2f",sucursalMEdrano.getUbicacion().obtenerDistanciaA(sucursalMozart.getUbicacion())) + "km");
 
        // System.out.println(comboLiving.getNombre());
 

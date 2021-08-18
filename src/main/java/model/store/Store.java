@@ -1,6 +1,5 @@
 package model.store;
 
-import model.item.Item;
 import model.item.Producto;
 import model.order.Order;
 
@@ -11,15 +10,15 @@ import java.util.Map;
 
 public class Store {
     private Integer id;
-    private String address;
+    private Ubicacion ubicacion;
     private String manager; //todo cambiarlo a un admin
     private Integer telephone;
     private Map<Producto,Integer> stock;
     private List<Order> orders;
 
-    public Store(Integer id, String address, String manager, Integer telephone){
+    public Store(Integer id, Ubicacion ubicacion, String manager, Integer telephone){
         this.id = id;
-        this.address = address;
+        this.ubicacion = ubicacion;
         this.manager = manager;
         this.telephone = telephone;
         this.stock = new HashMap<>();
@@ -52,11 +51,19 @@ public class Store {
     }
 
     public void mostrarCatalogo() {
-        stock.forEach( (item,cantidad) -> System.out.println("Articulo: " + item.getNombre() + " Precio: " + item.getPrecio())
+        stock.forEach( (item,cantidad) -> System.out.println("Articulo: " + item.getNombre() + " Precio: " + item.getPrecio() +" Stock: " + cantidad)
         );
     }
 
     public Float getPrecioEnvio(String ubicacion) {
         return 250f; //todo calcular y cambiar la ubicacion quiza por un objeto
+    }
+
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
     }
 }

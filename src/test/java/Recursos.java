@@ -2,6 +2,7 @@ import model.item.Articulo;
 import model.item.Combo;
 import model.item.Item;
 import model.store.Store;
+import model.store.Ubicacion;
 
 public class Recursos {
 
@@ -53,10 +54,11 @@ public class Recursos {
 
     //sucursales
     protected Store sucursalMEdrano;
-    protected Store sucursalMozzart;
+    protected Store sucursalMozart;
 
     public void iniciarSucursales(){ //todo
-        sucursalMEdrano = new Store(1,"Av. Medrano 951, C1179 AAQ, Buenos Aires","Roberto",4523);
+        Ubicacion medrano= new Ubicacion("Av. Medrano 951, C1179 AAQ, Buenos Aires",-34.59859412721525d ,-58.41992119079607d );
+        sucursalMEdrano = new Store(1,medrano,"Roberto",4523);
 
         sucursalMEdrano.agregarArticulo(consola,1);
         sucursalMEdrano.agregarArticulo(homeTheather,1);
@@ -68,7 +70,8 @@ public class Recursos {
         sucursalMEdrano.agregarArticulo(comboCine,1);
         sucursalMEdrano.agregarArticulo(comboLiving,1);
 
-        sucursalMozzart = new Store(1,"Mozart 2300, C1407 CABA","Juan",345345);
+        Ubicacion mozart = new Ubicacion("Mozart 2300, C1407 CABA",-34.65927096597888d ,-58.4673399745992d );
+        sucursalMozart = new Store(1,mozart,"Juan",345345);
     }
 
     public void iniciarArticulos(){
