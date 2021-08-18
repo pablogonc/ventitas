@@ -1,8 +1,13 @@
 package model.store;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Ubicacion {
+    @JsonProperty("title")
     private String direccion;
+    @JsonProperty("lat")
     private double latitud;
+    @JsonProperty("lng")
     private double longitud;
 
     public Ubicacion(String direccion, double latitud, double longitud) {
