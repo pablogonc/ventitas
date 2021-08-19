@@ -9,10 +9,11 @@ import java.text.NumberFormat;
 public class VentitasTests extends Recursos {
 
     @Test
-    public void testCart()
+    public void conecxionBD()
     {
-
-
+        iniciarSucursales();
+        Sesion sesion = new Sesion(sucursalMEdrano);
+        sesion.getUsuario().registrarse("pablo","123");
     }
 
     @Test

@@ -9,18 +9,19 @@ import model.order.Order;
 import model.store.Ubicacion;
 import noseque.Sesion;
 
-public class Normal extends Usuario{
+import java.util.List;
 
-    private Notificar notificar;
+public class Normal extends Usuario{
+    private String usuario; // contraseña
     private Ubicacion ubicacion;
-    private Order orden;
-    private String mail;
     private Integer telefono;
+    private String mail;
+    private List<Order> orden;
     private Notificar medioDeNotificacion;
 
     public Normal(Sesion sesion, String nombre) {
         super(sesion);
-        this.setNombre(nombre);
+        usuario = nombre;
         this.ubicacion = LocationService.getUbicacion("Sarmiento 440");
         this.mail = "stevenhca12@gmail.com";
         this.telefono = 1169710820;
@@ -42,7 +43,6 @@ public class Normal extends Usuario{
         this.medioDeNotificacion.notificar(this);
     }
 
-
     public String getMail(){
         return mail;
     }
@@ -53,8 +53,12 @@ public class Normal extends Usuario{
 
     @Override
     public void iniciarSesion(String nombre,String contrasenia ) {
-
         System.out.println("\u001b[31m Error: sesion ya iniciada\u001b[0m");
+    }
+
+    @Override
+    public void registrarse(String nombre, String contrasenia) {
+
     }
 
     @Override
@@ -84,7 +88,7 @@ public class Normal extends Usuario{
 
     @Override
     public Order getOrden() {
-        return orden;
+        return orden.get(0);
     }
 
     @Override
@@ -92,7 +96,7 @@ public class Normal extends Usuario{
 
         float precioEnvio = getSesion().getSucursal().getPrecioEnvio( ubicacion );
 
-        orden = getSesion().getCarrito().confirmarCarrito(precioEnvio,ubicacion);
+        orden.add(getSesion().getCarrito().confirmarCarrito(precioEnvio,ubicacion));
 
     }
 }

@@ -6,9 +6,8 @@ import model.order.Order;
 import noseque.Sesion;
 
 public abstract class Usuario {
-    private Sesion sesion;
     private Integer id;
-    private String nombre;
+    private Sesion sesion;
 
     public Usuario(Sesion sesion) {
         this.sesion = sesion;
@@ -22,23 +21,9 @@ public abstract class Usuario {
         this.sesion = sesion;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public abstract void iniciarSesion(String nombre,String contrasenia);
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public abstract void iniciarSesion(String nombre,String contrasenia );
+    public abstract void registrarse(String nombre,String contrasenia);
 
     public abstract void cerrarSesion();
 

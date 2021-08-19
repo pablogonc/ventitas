@@ -12,6 +12,11 @@ public class Administrador extends Usuario{
 
     @Override
     public void iniciarSesion(String nombre,String contrasenia ) {
+        System.out.println("\u001b[31m Error: sesion ya iniciada\u001b[0m");
+    }
+
+    @Override
+    public void registrarse(String nombre, String contrasenia) {
 
     }
 
