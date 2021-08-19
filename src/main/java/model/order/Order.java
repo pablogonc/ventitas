@@ -4,12 +4,15 @@ import model.cart.Cart;
 import model.item.Producto;
 import model.store.Ubicacion;
 
+
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static utilidades.Utilidades.*;
 
 public class Order {
     private List<Producto> items;
@@ -34,11 +37,11 @@ public class Order {
         DecimalFormat formatter = new DecimalFormat("#,###.00");
 
         System.out.println(
-                String.format("%-30s", "Fecha del pedido:") + "\u001b[36m" + fechaPedido +"\n\u001b[0m"
-                +  String.format("%-30s", "Destino:")+ "\u001b[36m" + destino.getDireccion()
+                String.format("%-30s", "Fecha del pedido:") + COLOR_AMARILLO + fechaPedido + COLOR_RESET + "\n"
+                +  String.format("%-30s", "Destino:")+ COLOR_AMARILLO + destino.getDireccion()
         );
 
-        System.out.println("\u001B[35m" +"-------------------------- Artículos --------------------------");
+        System.out.println(COLOR_MAGENTA +"-------------------------- Artículos --------------------------");
 
         System.out.println(
                 String.format("%-20s", "Articulo")
@@ -55,9 +58,9 @@ public class Order {
                                 + String.format("%-15s", ("$" +    formatter.format((item.getPrecio() * Collections.frequency(items,item)))  ))
                 ));
         System.out.println("--------------------------- Totales ---------------------------");
-        System.out.println("Precio de envio:    $" +  formatter.format(shippingPrice));
-        System.out.println("Total artículos:    $" +  formatter.format(precio));
-        System.out.println("Precio Final:       $" +  formatter.format((precio+shippingPrice)));
+        System.out.println("Precio de envio:    " + COLOR_AZUL + "$" +  formatter.format(shippingPrice) + COLOR_RESET);
+        System.out.println("Total artículos:    " + COLOR_AZUL + "$" + formatter.format(precio) + COLOR_RESET);
+        System.out.println("Precio Final:       " + COLOR_VERDE + "$" + formatter.format((precio+shippingPrice)) + COLOR_RESET);
         System.out.println("\u001B[0m");
     }
 

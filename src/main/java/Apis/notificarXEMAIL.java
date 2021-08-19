@@ -1,40 +1,53 @@
 package Apis;
-import com.mailjet.client.errors.MailjetException;
-import com.mailjet.client.MailjetClient;
-import com.mailjet.client.MailjetRequest;
-import com.mailjet.client.MailjetResponse;
-import com.mailjet.client.ClientOptions;
-import com.mailjet.client.resource.Emailv31;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
 public class notificarXEMAIL {
     /**
      * Run:
      */
-    public static void main(String[] args) throws MailjetException {
-        MailjetRequest request;
-        MailjetResponse response;
 
-        ClientOptions options = ClientOptions.builder().apiKey(System.getenv("bb31b8ff155bce268c81cf05498bfb24")).apiSecretKey(System.getenv("487a584e2cbce76ab601c3c9372da6e0")).build();
 
-        MailjetClient client = new MailjetClient(ClientOptions.builder().apiKey(System.getenv("bb31b8ff155bce268c81cf05498bfb24")).apiSecretKey(System.getenv("487a584e2cbce76ab601c3c9372da6e0")).build());
+    public static void main(String[] args) {
 
-        request = new MailjetRequest(Emailv31.resource)
-                .property(Emailv31.MESSAGES, new JSONArray()
-                        .put(new JSONObject()
-                                .put(Emailv31.Message.FROM, new JSONObject()
-                                        .put("Email", "stevenhca12@gmail.com")
-                                        .put("Name", "Steven"))
-                                .put(Emailv31.Message.TO, new JSONArray()
-                                        .put(new JSONObject()
-                                                .put("Email", "stevenhca12@gmail.com")
-                                                .put("Name", "Steven")))
-                                .put(Emailv31.Message.SUBJECT, "My first Mailjet Email!")
-                                .put(Emailv31.Message.TEXTPART, "Greetings from Mailjet!")
-                                .put(Emailv31.Message.HTMLPART, "<h3>Dear passenger 1, welcome to <a href=\"https://www.mailjet.com/\">Mailjet</a>!</h3><br />May the delivery force be with you!")));
-        response = client.post(request);
-        System.out.println(response.getStatus());
-        System.out.println(response.getData());
+        final String username = "ventitasSA425@gmail.com";
+        final String password = "ventitas1234";
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+        Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("from@gmail.com"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse("goncalves.pab@gmail.com, stevenhca12@gmail.com")
+            );
+            message.setSubject("Testing Gmail TLS");
+            message.setText("Buenas noches,"
+                    + "\n\n Su pedido se encuentra en camino xd");
+
+            Transport.send(message);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
+
 }
