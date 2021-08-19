@@ -3,15 +3,18 @@ package model.user;
 import Apis.Notificar;
 import model.item.Producto;
 import model.order.Order;
+import model.store.Ubicacion;
 import noseque.Sesion;
 
 public abstract class Usuario {
-    private Integer id;
+    protected Integer id;
     private Sesion sesion;
 
     public Usuario(Sesion sesion) {
         this.sesion = sesion;
     }
+
+
 
     public Sesion getSesion() {
         return sesion;
@@ -23,7 +26,7 @@ public abstract class Usuario {
 
     public abstract void iniciarSesion(String nombre,String contrasenia);
 
-    public abstract void registrarse(String nombre,String contrasenia);
+    public abstract void registrarse(String nombre,String contrasenia,String direccion,int telefono,String mail,String metodoNotificacion);
 
     public abstract void cerrarSesion();
 
@@ -45,6 +48,11 @@ public abstract class Usuario {
 
     public abstract void confirmarPedido();
 
+    public abstract void eliminarUsuario(int id) ;
+
     public abstract Order getOrden();
 
+    public abstract void eliminarUsuario();
+
+    public void notificar(){}
 }

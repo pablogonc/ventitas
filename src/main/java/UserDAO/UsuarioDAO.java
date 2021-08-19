@@ -1,6 +1,10 @@
 package UserDAO;
 
 import Tests.Persona;
+import model.user.Administrador;
+import model.user.Normal;
+import model.user.Usuario;
+import noseque.Sesion;
 
 import java.sql.*;
 
@@ -9,7 +13,7 @@ public class UsuarioDAO {
     private Connection conn;
 
     public Connection newConnection() {
-        Connection conn = null;
+        Connection conn ;
         try {
             String connectionUrl = "jdbc:mysql://localhost:3306/ventitasSA";
 
@@ -52,9 +56,9 @@ public class UsuarioDAO {
 
     }
 
-    public int registrarse(String nombre, String contrasenia) {
+    public int registrarse(String nombre,String contrasenia,String direccion,int telefono,String mail,String metodoNotificacion) {
 
-        String consulta = "INSERT INTO persona (nombre, edad) VALUES ('" + nombre + "'," + contrasenia + ");";
+        String consulta = "insert into usuario values (null,'" + nombre + "','" + contrasenia + "','" + direccion + "'," + telefono +",'" + mail +"','" + metodoNotificacion +"',false);" ;
 
         try {
 
@@ -83,4 +87,67 @@ public class UsuarioDAO {
 
     }
 
+    public Usuario iniciarSesion(Sesion sesion, String nombre, String contrasenia) {
+        String consulta = "select * from usuario  where usuario='"+nombre+"' and contrasenia = '" + contrasenia + "';" ;
+
+        try {
+            this.conn = newConnection();
+
+            // Ejecucion
+            Statement stmt = this.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            rs.next();  // TODO chequear
+            Usuario usuario;
+
+
+            if(rs.getBoolean("esAdmin")){
+                usuario= new Administrador(sesion,
+                        rs.getInt("idUsuario"),
+                        nombre,
+                        rs.getString("direccion"),
+                        rs.getInt("telefono"),
+                        rs.getString("mail"),
+                        rs.getString("notificacion"));
+            }else{
+                usuario = new Normal(sesion,
+                        rs.getInt("idUsuario"),
+                        nombre,
+                        rs.getString("direccion"),
+                        rs.getInt("telefono"),
+                        rs.getString("mail"),
+                        rs.getString("notificacion")
+                );
+            }
+
+            return usuario;
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error," + ex);
+            return null;
+        }
+
+    }
+
+    public void elimininar(int id) {
+        String consulta = "DELETE FROM usuario WHERE idUsuario = " + id + ";";
+
+        try {
+            this.conn = newConnection();
+
+            // Ejecuci�n
+            PreparedStatement stmt = this.conn.prepareStatement(consulta);
+
+            // execute the preparedstatement
+            stmt.execute();
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error en Delete:" + ex);
+
+        }
+    }
 }

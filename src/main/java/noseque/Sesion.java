@@ -46,8 +46,8 @@ public class Sesion {
         this.usuario = usuario;
     }
 
-    public void registrarse(String usuario, String contrasenia){
-        this.usuario.registrarse(usuario,contrasenia);
+    public void registrarse(String nombre,String contrasenia,String direccion,int telefono,String mail,String metodoNotificacion){
+        this.usuario.registrarse(nombre,contrasenia,direccion,telefono,mail,metodoNotificacion);
     }
 
     public void iniciarSesion(String usuario, String contrasenia){

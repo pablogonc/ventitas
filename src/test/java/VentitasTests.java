@@ -9,12 +9,34 @@ import java.text.NumberFormat;
 public class VentitasTests extends Recursos {
 
     @Test
-    public void conecxionBD()
+    public void RegistrarUsuario()
     {
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
-        sesion.getUsuario().registrarse("pablo","123");
+        sesion.getUsuario().registrarse("steven","123","jonte 2551",455528542,"stevenhca12@gmail.com","mail");
+
     }
+
+    @Test
+    public void IniciarSesion()
+    {
+        iniciarSucursales();
+        Sesion sesion = new Sesion(sucursalMEdrano);
+        sesion.getUsuario().iniciarSesion("steven","123");
+        sesion.getUsuario().notificar();
+    }
+
+    @Test
+    public void borrarUsuario()
+    {
+        iniciarSucursales();
+        Sesion sesion = new Sesion(sucursalMEdrano);
+        sesion.getUsuario().iniciarSesion("admin","1234");
+        sesion.getUsuario().eliminarUsuario(9);
+
+    }
+
+
 
     @Test
     public void productos()

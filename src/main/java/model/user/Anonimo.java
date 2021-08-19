@@ -19,21 +19,27 @@ public class Anonimo extends Usuario {
     @Override
     public void iniciarSesion(String nombre,String contrasenia ) {
 
+        UsuarioDAO oUsuario = new UsuarioDAO();
 
-
-        getSesion().setUsuario(new Normal(getSesion(),nombre));
+        getSesion().setUsuario(oUsuario.iniciarSesion(getSesion(),nombre,contrasenia));
+      //  getSesion().setUsuario(new Normal(getSesion(),nombre));
     }
 
     @Override
-    public void registrarse(String usuario, String contrasenia){
+    public void registrarse(String usuario,String contrasenia,String direccion,int telefono,String mail,String metodoNotificacion){
         UsuarioDAO oUsuario = new UsuarioDAO();
         if(oUsuario.esValido(usuario)){
             System.out.println(COLOR_VERDE + "El usuario es valido"+ COLOR_RESET);
+
+            int id = oUsuario.registrarse(usuario,contrasenia,direccion,telefono,mail,metodoNotificacion);
+
+            getSesion().setUsuario( new Normal( getSesion(),id,usuario,direccion,telefono,mail,metodoNotificacion ) );
+
         }else {
             System.out.println(COLOR_ROJO + "El usuario no es valido" + COLOR_RESET);
-        };
+        }
 
-        String consulta = "SELECT COUNT (*) FROM usuario WHERE usuario = \"" + usuario + "\";";
+
 
     }
 
@@ -68,7 +74,17 @@ public class Anonimo extends Usuario {
     }
 
     @Override
+    public void eliminarUsuario(int id)  {
+        System.out.println(COLOR_ROJO + "error usted no puede eliminar usuarios" + COLOR_RESET);
+    }
+
+    @Override
     public Order getOrden() {
         return null;
+    }
+
+    @Override
+    public void eliminarUsuario() {
+
     }
 }

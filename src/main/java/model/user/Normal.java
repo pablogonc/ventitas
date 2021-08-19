@@ -5,11 +5,14 @@ import Apis.Notificar;
 import Apis.NotificarXEMAIL;
 import Apis.NotificarXSMS;
 import Apis.NotificarXWPP;
+import UserDAO.UsuarioDAO;
 import model.order.Order;
 import model.store.Ubicacion;
 import noseque.Sesion;
 
 import java.util.List;
+
+import static utilidades.Utilidades.*;
 
 public class Normal extends Usuario{
     private String usuario; // contraseña
@@ -19,14 +22,21 @@ public class Normal extends Usuario{
     private List<Order> orden;
     private Notificar medioDeNotificacion;
 
-    public Normal(Sesion sesion, String nombre) {
+
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public Normal(Sesion sesion, int id, String usuario, String direccion, Integer telefono, String mail, String medioDeNotificacion) {
         super(sesion);
-        usuario = nombre;
-        this.ubicacion = LocationService.getUbicacion("Sarmiento 440");
-        this.mail = "stevenhca12@gmail.com";
-        this.telefono = 1169710820;
-        String medio = "mail"; // todo obtener de la base de datos
-        switch (medio) {
+        this.id = id;
+        this.usuario = usuario;
+        this.ubicacion = LocationService.getUbicacion(direccion);
+        this.telefono = telefono;
+        this.mail = mail;
+
+        switch (medioDeNotificacion) {
             case "mail":
                 this.medioDeNotificacion = new NotificarXEMAIL();
                 break;
@@ -37,6 +47,8 @@ public class Normal extends Usuario{
                 this.medioDeNotificacion = new NotificarXWPP();
                 break;
         }
+
+
     }
 
     public void notificar(){
@@ -57,7 +69,7 @@ public class Normal extends Usuario{
     }
 
     @Override
-    public void registrarse(String nombre, String contrasenia) {
+    public void registrarse(String nombre,String contrasenia,String direccion,int telefono,String mail,String metodoNotificacion) {
 
     }
 
@@ -87,8 +99,19 @@ public class Normal extends Usuario{
     }
 
     @Override
+    public void eliminarUsuario(int id)  {
+        System.out.println(COLOR_ROJO + "error usted no puede eliminar usuarios" + COLOR_RESET);
+    }
+
+    @Override
     public Order getOrden() {
         return orden.get(0);
+    }
+
+    @Override
+    public void eliminarUsuario() {
+        UsuarioDAO oUsuario = new UsuarioDAO();
+        oUsuario.elimininar(this.id);
     }
 
     @Override
