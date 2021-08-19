@@ -1,5 +1,6 @@
 package model.user;
 
+import Apis.Notificar;
 import model.item.Producto;
 import model.order.Order;
 import noseque.Sesion;
@@ -8,8 +9,6 @@ public abstract class Usuario {
     private Sesion sesion;
     private Integer id;
     private String nombre;
-    private Integer telefono;
-    private String mail;
 
     public Usuario(Sesion sesion) {
         this.sesion = sesion;

@@ -1,11 +1,9 @@
 package Apis;
 
-public abstract class Notificar {
+import model.user.Normal;
 
+public interface Notificar {
 
-
-    public void notificar(){
-
-    }
+    void notificar(Normal usuario);
 
 }

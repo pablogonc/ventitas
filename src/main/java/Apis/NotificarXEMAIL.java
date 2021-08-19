@@ -1,17 +1,16 @@
 package Apis;
 
+import model.user.Normal;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class notificarXEMAIL {
-    /**
-     * Run:
-     */
+public class NotificarXEMAIL implements Notificar{
 
-
-    public static void main(String[] args) {
+    @Override
+    public void notificar(Normal usuario) {
 
         final String username = "ventitasSA425@gmail.com";
         final String password = "ventitas1234";
@@ -32,14 +31,14 @@ public class notificarXEMAIL {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("from@gmail.com"));
+            message.setFrom(new InternetAddress("ventitasSA425@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse("goncalves.pab@gmail.com, stevenhca12@gmail.com")
+                    InternetAddress.parse(usuario.getMail())
             );
-            message.setSubject("Testing Gmail TLS");
-            message.setText("Buenas noches,"
-                    + "\n\n Su pedido se encuentra en camino xd");
+            message.setSubject("Pedido en Camino"); // tema del mail
+            message.setText("Buenas,"
+                    + "\n\n Su pedido se encuentra en camino.\n Muchas Gracias por su Compra. "); // cuerpo
 
             Transport.send(message);
 
