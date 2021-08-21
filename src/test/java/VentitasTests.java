@@ -1,10 +1,7 @@
-import Apis.LocationService.LocationService;
-import model.store.Ubicacion;
-import noseque.Sesion;
+import apis.locationService.LocationService;
+import model.sucursal.Ubicacion;
+import sesion.Sesion;
 import org.junit.Test;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class VentitasTests extends Recursos {
 

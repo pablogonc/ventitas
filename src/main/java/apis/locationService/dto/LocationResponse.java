@@ -1,7 +1,7 @@
-package Apis.LocationService.dto;
+package apis.locationService.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import model.store.Ubicacion;
+import model.sucursal.Ubicacion;
 
 import java.util.List;
 

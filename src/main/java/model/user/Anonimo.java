@@ -1,8 +1,8 @@
 package model.user;
 
-import UserDAO.UsuarioDAO;
+import userDAO.UsuarioDAO;
 import model.order.Order;
-import noseque.Sesion;
+import sesion.Sesion;
 
 import static utilidades.Utilidades.*;
 

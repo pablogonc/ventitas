@@ -1,4 +1,4 @@
-package UserDAO;
+package userDAO;
 
 public class UsuarioMapper {
 }

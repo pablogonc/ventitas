@@ -1,10 +1,10 @@
-package UserDAO;
+package userDAO;
 
 import Tests.Persona;
 import model.user.Administrador;
 import model.user.Normal;
 import model.user.Usuario;
-import noseque.Sesion;
+import sesion.Sesion;
 
 import java.sql.*;
 

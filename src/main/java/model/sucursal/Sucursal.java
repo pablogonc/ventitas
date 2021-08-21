@@ -1,6 +1,5 @@
-package model.store;
+package model.sucursal;
 
-import model.item.Articulo;
 import model.item.Producto;
 import model.order.Order;
 
@@ -9,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Store {
+public class Sucursal {
     private Integer id;
     private Ubicacion ubicacion;
     private String manager;       //todo cambiarlo a un admin
@@ -17,7 +16,7 @@ public class Store {
     private Map<Producto,Integer> stock;
     private List<Order> orders;
 
-    public Store(Integer id, Ubicacion ubicacion, String manager, Integer telefono){
+    public Sucursal(Integer id, Ubicacion ubicacion, String manager, Integer telefono){
         this.id = id;
         this.ubicacion = ubicacion;
         this.manager = manager;

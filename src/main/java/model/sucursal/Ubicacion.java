@@ -1,4 +1,4 @@
-package model.store;
+package model.sucursal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

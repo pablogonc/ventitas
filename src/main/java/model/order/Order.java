@@ -2,7 +2,7 @@ package model.order;
 
 import model.cart.Cart;
 import model.item.Producto;
-import model.store.Ubicacion;
+import model.sucursal.Ubicacion;
 
 
 import java.text.DecimalFormat;

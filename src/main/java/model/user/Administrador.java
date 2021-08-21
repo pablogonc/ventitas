@@ -1,14 +1,14 @@
 package model.user;
 
-import Apis.LocationService.LocationService;
-import Apis.Notificar;
-import Apis.NotificarXEMAIL;
-import Apis.NotificarXSMS;
-import Apis.NotificarXWPP;
-import UserDAO.UsuarioDAO;
+import apis.locationService.LocationService;
+import apis.Notificar;
+import apis.NotificarXEMAIL;
+import apis.NotificarXSMS;
+import apis.NotificarXWPP;
+import userDAO.UsuarioDAO;
 import model.order.Order;
-import model.store.Ubicacion;
-import noseque.Sesion;
+import model.sucursal.Ubicacion;
+import sesion.Sesion;
 
 public class Administrador extends Usuario{
 

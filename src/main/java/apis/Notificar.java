@@ -1,4 +1,4 @@
-package Apis;
+package apis;
 
 import model.user.Normal;
 

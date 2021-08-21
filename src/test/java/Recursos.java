@@ -1,7 +1,7 @@
 import model.item.Articulo;
 import model.item.Combo;
-import model.store.Store;
-import model.store.Ubicacion;
+import model.sucursal.Sucursal;
+import model.sucursal.Ubicacion;
 
 public class Recursos {
 
@@ -52,12 +52,12 @@ public class Recursos {
     protected Combo comboBanda;//combo banda = comboguitarrista + bateria + bajo
 
     //sucursales
-    protected Store sucursalMEdrano;
-    protected Store sucursalMozart;
+    protected Sucursal sucursalMEdrano;
+    protected Sucursal sucursalMozart;
 
     public void iniciarSucursales(){ //todo
         Ubicacion medrano= new Ubicacion("Av. Medrano 951, C1179 AAQ, Buenos Aires",-34.59859412721525d ,-58.41992119079607d );
-        sucursalMEdrano = new Store(1,medrano,"Roberto",1148677500);
+        sucursalMEdrano = new Sucursal(1,medrano,"Roberto",1148677500);
 
         sucursalMEdrano.agregarArticulo(consola,1);
         sucursalMEdrano.agregarArticulo(homeTheather,1);
@@ -70,7 +70,7 @@ public class Recursos {
         sucursalMEdrano.agregarArticulo(comboLiving,1);
 
         Ubicacion mozart = new Ubicacion("Mozart 2300, C1407 CABA",-34.65927096597888d ,-58.4673399745992d );
-        sucursalMozart = new Store(1,mozart,"Juan",1148677500);
+        sucursalMozart = new Sucursal(1,mozart,"Juan",1148677500);
     }
 
     public void iniciarArticulos(){

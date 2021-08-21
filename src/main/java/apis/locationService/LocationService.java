@@ -1,10 +1,10 @@
-package Apis.LocationService;
+package apis.locationService;
 
-import Apis.LocationService.dto.LocationResponse;
+import apis.locationService.dto.LocationResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.store.Ubicacion;
+import model.sucursal.Ubicacion;
 import org.apache.cxf.jaxrs.client.WebClient;
 
 import javax.ws.rs.core.MultivaluedHashMap;
@@ -37,16 +37,8 @@ public class LocationService {
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 }
-
-            case 400:
-                return null;
-               // throw new Exception("Error: offset no valido");
-            case 401:
-                return null;
-                //throw new Exception("Error: acceso no autorizado");
             default:
                 return null;
-                //throw new Exception("Error en la llamada a /api/hogares");
         }
 
     }
