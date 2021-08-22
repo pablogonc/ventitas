@@ -11,7 +11,7 @@ public class NotificarXWPP implements Notificar{
     public static final String AUTH_TOKEN = "2fddec75963132e73f1e3327c3b54923";
 
     @Override
-    public void notificar(Contacto usuario) {
+    public void notificar(Contacto usuario, String mensaje) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
                 new com.twilio.type.PhoneNumber("whatsapp:+54" +  usuario.getTelefono()),

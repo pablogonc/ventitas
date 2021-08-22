@@ -3,6 +3,8 @@ package model.cart;
 import model.item.Producto;
 import model.order.Order;
 import model.sucursal.Ubicacion;
+import model.user.Normal;
+import model.user.Usuario;
 
 import java.util.*;
 
@@ -55,8 +57,8 @@ public class Cart {
         items.remove(item);
     }
 
-    public Order confirmarCarrito(Float shippingPrice, Ubicacion destino){
-        return new Order(this,shippingPrice,destino);
+    public Order confirmarCarrito(Usuario usuario,Float shippingPrice){
+        return new Order((Normal) usuario, this,shippingPrice);
     }
 
 

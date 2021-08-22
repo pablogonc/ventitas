@@ -7,6 +7,7 @@ import apis.NotificarXWPP;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import model.sucursal.Ubicacion;
+import sistema.Observador;
 
 @Data
 @AllArgsConstructor
@@ -37,8 +38,9 @@ public class Contacto {
 
     }
 
-    public void notificar(){
-        this.medioDeNotificacion.notificar(this);
+    public void notificar(String mensaje){
+        this.medioDeNotificacion.notificar(this,mensaje);
     }
+
 
 }

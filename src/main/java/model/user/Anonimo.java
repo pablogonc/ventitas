@@ -82,7 +82,7 @@ public class Anonimo extends Usuario {
     }
 
     @Override
-    public void notificar() {
+    public void notificar(String mensaje) {
         solicitarInicioDeSesion();
     }
 

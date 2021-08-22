@@ -2,7 +2,13 @@ package model.order;
 
 import model.cart.Cart;
 import model.item.Producto;
+import model.sucursal.Sucursal;
 import model.sucursal.Ubicacion;
+import model.user.Contacto;
+import model.user.Normal;
+import model.user.Usuario;
+import sistema.Observador;
+import sistema.administradorDeEventos;
 
 
 import java.text.DecimalFormat;
@@ -14,21 +20,27 @@ import java.util.stream.Collectors;
 
 import static utilidades.Utilidades.*;
 
-public class Order {
+public class Order  {
     private List<Producto> items;
     private Float precio;
     private Float shippingPrice;
     private LocalDateTime fechaPedido;
     private Ubicacion destino;
     private Boolean confirmado;
+    private administradorDeEventos eventos;
+    private Sucursal sucursal;
 
-    public Order(Cart carrito, Float shippingPrice, Ubicacion destino){
+    public Order(Normal usuario, Cart carrito, Float shippingPrice){
         this.items = carrito.obtenerItems();
         this.precio = carrito.obtenerPrecio();
         this.shippingPrice = shippingPrice;
-        this.destino = destino;
+        this.destino = usuario.getSesion().getContacto().getUbicacion();
         DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         this.fechaPedido = LocalDateTime.now();
+        this.eventos = new administradorDeEventos("pedido confirmado","pedido en camino");
+        this.sucursal = usuario.getSesion().getSucursal();
+        this.eventos.suscribir("pedido en camino", usuario);
+        this.eventos.suscribir("pedido confirmado",sucursal.getEncargado());
         // todo calcular envio
     }
 
@@ -51,8 +63,8 @@ public class Order {
         );
         items.stream().distinct().collect(Collectors.toList()).forEach((item) ->
 
-                System.out.println(
-                        String.format("%-29s", item.getNombre())
+                System.out.println(COLOR_CYAN+
+                        String.format("%-29s", item.getNombre()) +COLOR_RESET
                                 + String.format("%-15s",("x"+ Collections.frequency(items,item)))
                                 + String.format("%-15s",("$"+ formatter.format(item.getPrecio())))
                                 + String.format("%-15s", ("$" +    formatter.format((item.getPrecio() * Collections.frequency(items,item)))  ))
@@ -64,9 +76,16 @@ public class Order {
         System.out.println("\u001B[0m");
     }
 
-    private void confirmarOrden(){
+    public void confirmarOrden(){
         this.confirmado = Boolean.TRUE;
         // subir a la base de datos
+        //todo
         // avisar a un admin de la sucursal
+        eventos.notificar("pedido confirmado",sucursal.getUbicacion().getDireccion(),destino.getDireccion()); //ver otros datos para poner
     }
+    public void enviar(){
+        eventos.notificar("pedido en camino",sucursal.getUbicacion().getDireccion(),destino.getDireccion()); //ver otros datos para poner
+    }
+
+
 }

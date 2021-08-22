@@ -35,6 +35,5 @@ public abstract class Usuario {
 
     public abstract void eliminarUsuario(String nombre);
 
-
-    public abstract void notificar();
+    public abstract void notificar(String mensaje);
 }

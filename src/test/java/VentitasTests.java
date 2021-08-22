@@ -13,7 +13,6 @@ public class VentitasTests extends Recursos {
 
         sesion.getUsuario().registrarse("pabloo","123","jonte 2551",455528542,"goncalves.pab@gmail.com","mail");
 
-        sesion.getUsuario().notificar();
 
     }
 
@@ -26,7 +25,6 @@ public class VentitasTests extends Recursos {
 
         sesion.getUsuario().iniciarSesion("pabloo","123");
 
-        sesion.getUsuario().notificar();
     }
 
     @Test
@@ -82,16 +80,48 @@ public class VentitasTests extends Recursos {
 
         //sesion.getSucursal().mostrarCatalogo();
 
-        sesion.getCarrito().addItem(consola,1);
-        sesion.getCarrito().addItem(tv,1);
-        sesion.getCarrito().addItem(notebook,1);
-        sesion.getCarrito().addItem(controlConsola,2);
+        sesion.addItem(consola,1);
+        sesion.addItem(tv,1);
+        sesion.addItem(notebook,1);
+        sesion.addItem(controlConsola,2);
 
         sesion.getUsuario().iniciarSesion("pablo","1234");
 
         sesion.getUsuario().confirmarCarrito();
 
         sesion.getUsuario().verEstadoPedido();
+
+        sesion.getOrdenes().get(0).confirmarOrden();
+
+        sesion.getOrdenes().get(0).enviar();
+
+    }
+
+    @Test
+    public void agotarStock() {
+
+        iniciarArticulos();
+        iniciarSucursales();
+
+        Sesion sesion = new Sesion(sucursalMEdrano);
+
+        //sesion.getSucursal().mostrarCatalogo();
+
+        sesion.addItem(consola,4); //se agota de una
+        sesion.addItem(tv,2); //no se agota
+        sesion.addItem(homeTheather,5); //quedan otras 5
+        sesion.addItem(homeTheather,5); // se agota
+        sesion.addItem(controlConsola,2); // ya no habia stock suficiente en sucursal
+
+        sesion.getUsuario().iniciarSesion("pablo","1234");
+
+        sesion.getUsuario().confirmarCarrito();
+
+        sesion.getUsuario().verEstadoPedido();
+
+        sesion.getOrdenes().get(0).confirmarOrden();
+
+        sesion.getOrdenes().get(0).enviar();
 
     }
 }

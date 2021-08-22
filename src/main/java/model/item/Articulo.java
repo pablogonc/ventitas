@@ -23,7 +23,7 @@ public class Articulo implements Producto{
 
     @Override
     public String getNombre() {
-        return "\u001b[36m" + nombre + "\u001b[0m";
+        return nombre ;
     }
 
     @Override

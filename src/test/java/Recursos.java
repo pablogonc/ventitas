@@ -1,7 +1,13 @@
+import apis.locationService.LocationService;
 import model.item.Articulo;
 import model.item.Combo;
 import model.sucursal.Sucursal;
 import model.sucursal.Ubicacion;
+import model.user.Administrador;
+import model.user.Contacto;
+import model.user.Normal;
+import model.user.Usuario;
+import sesion.Sesion;
 
 public class Recursos {
 
@@ -57,11 +63,18 @@ public class Recursos {
 
     public void iniciarSucursales(){ //todo
         Ubicacion medrano= new Ubicacion("Av. Medrano 951, C1179 AAQ, Buenos Aires",-34.59859412721525d ,-58.41992119079607d );
-        sucursalMEdrano = new Sucursal(1,medrano,"Roberto",1148677500);
 
-        sucursalMEdrano.agregarArticulo(consola,1);
-        sucursalMEdrano.agregarArticulo(homeTheather,1);
-        sucursalMEdrano.agregarArticulo(tv,1);
+        Sesion sesiona= new Sesion(null);
+        Contacto c= new Contacto("adminMedrano", LocationService.getUbicacion("medrano 1251"),424225,"goncalves.pab@gmail.com","mail");
+        Administrador usera = new Administrador(sesiona);
+        sesiona.setUsuario(usera);
+        sesiona.setContacto(c);
+
+        sucursalMEdrano = new Sucursal(1,medrano, usera,1148677500);
+
+        sucursalMEdrano.agregarArticulo(consola,4);
+        sucursalMEdrano.agregarArticulo(homeTheather,10);
+        sucursalMEdrano.agregarArticulo(tv,3);
         sucursalMEdrano.agregarArticulo(controlConsola,1);
         sucursalMEdrano.agregarArticulo(sillon,1);
 
@@ -69,8 +82,20 @@ public class Recursos {
         sucursalMEdrano.agregarArticulo(comboCine,1);
         sucursalMEdrano.agregarArticulo(comboLiving,1);
 
+        sesiona.setSucursal(sucursalMEdrano);
+
+
+        Sesion sesionb= new Sesion(null);
+        Contacto c2= new Contacto("adminMozart", LocationService.getUbicacion("medrano 1251"),424225,"goncalves.pab@gmail.com","mail");
+        Administrador userb = new Administrador(sesionb);
+        sesionb.setUsuario(userb);
+        sesionb.setContacto(c2);
+
         Ubicacion mozart = new Ubicacion("Mozart 2300, C1407 CABA",-34.65927096597888d ,-58.4673399745992d );
-        sucursalMozart = new Sucursal(1,mozart,"Juan",1148677500);
+        sucursalMozart = new Sucursal(1,mozart,userb,1148677500);
+
+        sesionb.setSucursal(sucursalMozart);
+
     }
 
     public void iniciarArticulos(){

@@ -11,7 +11,7 @@ import java.util.Properties;
 public class NotificarXEMAIL implements Notificar{
 
     @Override
-    public void notificar(Contacto usuario) {
+    public void notificar(Contacto usuario, String mensaje) {
 
         final String username = "ventitasSA425@gmail.com";
         final String password = "ventitas1234";
@@ -38,8 +38,7 @@ public class NotificarXEMAIL implements Notificar{
                     InternetAddress.parse(usuario.getMail())
             );
             message.setSubject("Pedido en Camino"); // tema del mail
-            message.setText("Buenas,"
-                    + "\n\n Su pedido se encuentra en camino.\n Muchas Gracias por su Compra. "); // cuerpo
+            message.setText(mensaje); // cuerpo
 
             Transport.send(message);
 

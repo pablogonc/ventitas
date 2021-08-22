@@ -5,6 +5,7 @@ import apis.Notificar;
 import apis.NotificarXEMAIL;
 import apis.NotificarXSMS;
 import apis.NotificarXWPP;
+import sistema.Observador;
 import userDAO.UsuarioDAO;
 import model.order.Order;
 import model.sucursal.Ubicacion;
@@ -13,7 +14,7 @@ import sesion.Sesion;
 import static utilidades.Utilidades.COLOR_AMARILLO;
 import static utilidades.Utilidades.COLOR_RESET;
 
-public class Administrador extends Usuario{
+public class Administrador extends Usuario implements Observador {
 
 
     public Administrador(Sesion sesion) {
@@ -66,8 +67,8 @@ public class Administrador extends Usuario{
     }
 
     @Override
-    public void notificar() {
-
+    public void notificar(String mensaje) {
+        getSesion().getContacto().notificar(mensaje);
     }
 
     @Override
@@ -75,5 +76,22 @@ public class Administrador extends Usuario{
         System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
         return null;
     }
+
+    @Override
+    public void update(String tipoEvento, String... argumentos) {
+        String mensaje;
+        switch (tipoEvento){
+            case "stock":
+                mensaje ="Le comunicamos que se agoto el stock de " +argumentos[0] +" de la sucursal :" + argumentos[1] ;
+                notificar(mensaje);
+                break;
+            case "pedido confirmado":
+                mensaje ="Le comunicamos que se confirmo un pedido de la sucursal :" + argumentos[0] + " para ser enviado a:" + argumentos[1];
+                notificar(mensaje);
+                break;
+        }
+
+    }
+
 
 }
