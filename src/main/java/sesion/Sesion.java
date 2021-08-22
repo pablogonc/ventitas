@@ -10,6 +10,7 @@ import model.user.Anonimo;
 import model.user.Contacto;
 import model.user.Usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -28,6 +29,7 @@ public class Sesion {
         this.usuario = new Anonimo(this);
         this.saldo = 0f;
         this.carrito = new Cart();
+        ordenes = new ArrayList<>();
     }
 
     public void seleccionarSucursal(Sucursal sucursal2){
@@ -52,4 +54,7 @@ public class Sesion {
     }
 
 
+    public void addOrden(Order orden) {
+        ordenes.add(orden);
+    }
 }

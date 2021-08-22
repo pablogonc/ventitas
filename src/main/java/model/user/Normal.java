@@ -42,7 +42,8 @@ public class Normal extends Usuario{
 
     @Override
     public void verEstadoPedido() {
-
+        Order orden = getSesion().getOrdenes().get(0);
+        orden.showOrder();
     }
 
     @Override
@@ -80,6 +81,6 @@ public class Normal extends Usuario{
     public void confirmarCarrito() {
         Ubicacion destino = getSesion().getContacto().getUbicacion();
         float precioEnvio = getSesion().getSucursal().getPrecioEnvio(destino);
-        getSesion().getCarrito().confirmarCarrito(precioEnvio,destino);
+        getSesion().addOrden(getSesion().getCarrito().confirmarCarrito(precioEnvio,destino)); //todo ¿registrar en base?
     }
 }

@@ -73,7 +73,7 @@ public class VentitasTests extends Recursos {
     }
 
     @Test
-    public void usuarios() {
+    public void ConfirmarPedido() {
 
         iniciarArticulos();
         iniciarSucursales();
@@ -87,11 +87,11 @@ public class VentitasTests extends Recursos {
         sesion.getCarrito().addItem(notebook,1);
         sesion.getCarrito().addItem(controlConsola,2);
 
-        sesion.getUsuario().iniciarSesion("juan","sad");
+        sesion.getUsuario().iniciarSesion("pablo","1234");
 
         sesion.getUsuario().confirmarCarrito();
 
-        sesion.getUsuario().getOrden().showOrder();
+        sesion.getUsuario().verEstadoPedido();
 
     }
 }
