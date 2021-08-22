@@ -19,12 +19,15 @@ public class Sesion {
     private Cart carrito;
     private Usuario usuario;
     private List<Order> ordenes;
+    private float saldo;
+
 
     public Sesion(Sucursal sucursal) {
         this.contacto = null;
         this.sucursal = sucursal;
         this.usuario = new Anonimo(this);
-        carrito = new Cart();
+        this.saldo = 0f;
+        this.carrito = new Cart();
     }
 
     public void seleccionarSucursal(Sucursal sucursal2){

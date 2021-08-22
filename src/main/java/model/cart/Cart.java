@@ -1,6 +1,8 @@
 package model.cart;
 
 import model.item.Producto;
+import model.order.Order;
+import model.sucursal.Ubicacion;
 
 import java.util.*;
 
@@ -52,10 +54,10 @@ public class Cart {
 
         items.remove(item);
     }
-/*
+
     public Order confirmarCarrito(Float shippingPrice, Ubicacion destino){
         return new Order(this,shippingPrice,destino);
-    }*/
+    }
 
 
     public float obtenerPrecio() {

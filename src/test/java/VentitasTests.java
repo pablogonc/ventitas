@@ -40,7 +40,17 @@ public class VentitasTests extends Recursos {
         sesion.getUsuario().eliminarUsuario("pabloo");
 
     }
+    @Test
+    public void verSaldo()
+    {
+        iniciarSucursales();
+        Sesion sesion = new Sesion(sucursalMEdrano);
 
+        sesion.getUsuario().iniciarSesion("admin","1234");
+
+        sesion.getUsuario().verSaldo();
+
+    }
 
 
     @Test

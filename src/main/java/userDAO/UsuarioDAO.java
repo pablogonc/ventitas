@@ -61,7 +61,7 @@ public class UsuarioDAO {
 
         int idContacto = registrarContacto(direccion, telefono, mail, metodoNotificacion);
 
-        String consulta = "insert into usuario values (null,"+idContacto  +",'" + nombre + "','" + contrasenia + "',false);" ;
+        String consulta = "insert into usuario values (null,"+idContacto  +",'" + nombre + "','" + contrasenia + ",0,',false);" ;
 
         try {
 
@@ -138,6 +138,8 @@ public class UsuarioDAO {
             }else{
                 usuario = new Normal(sesion);
             }
+
+            sesion.setSaldo(rs.getFloat("saldo"));
 
             return usuario;
 

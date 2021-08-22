@@ -83,11 +83,12 @@ public class Anonimo extends Usuario {
 
     @Override
     public void notificar() {
-
+        solicitarInicioDeSesion();
     }
 
     @Override
     public Order getOrden() {
+        solicitarInicioDeSesion();
         return null;
     }
 

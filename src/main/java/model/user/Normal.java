@@ -1,6 +1,7 @@
 package model.user;
 
 
+import model.sucursal.Ubicacion;
 import userDAO.UsuarioDAO;
 import model.order.Order;
 import sesion.Sesion;
@@ -36,7 +37,7 @@ public class Normal extends Usuario{
 
     @Override
     public void verSaldo() {
-
+        System.out.println(COLOR_MAGENTA + "Saldo: " + COLOR_VERDE + "$" + getSesion().getSaldo() + COLOR_RESET);
     }
 
     @Override
@@ -77,6 +78,8 @@ public class Normal extends Usuario{
 
     @Override
     public void confirmarCarrito() {
-
+        Ubicacion destino = getSesion().getContacto().getUbicacion();
+        float precioEnvio = getSesion().getSucursal().getPrecioEnvio(destino);
+        getSesion().getCarrito().confirmarCarrito(precioEnvio,destino);
     }
 }

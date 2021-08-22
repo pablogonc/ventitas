@@ -11,6 +11,7 @@ import model.sucursal.Ubicacion;
 import sesion.Sesion;
 
 import static utilidades.Utilidades.COLOR_AMARILLO;
+import static utilidades.Utilidades.COLOR_RESET;
 
 public class Administrador extends Usuario{
 
@@ -21,12 +22,12 @@ public class Administrador extends Usuario{
 
     @Override
     public void iniciarSesion(String nombre,String contrasenia ) {
-        System.out.println(COLOR_AMARILLO +"Advertencia: sesion ya iniciada\u001b[0m");
+        System.out.println(COLOR_AMARILLO +"Advertencia: sesion ya iniciada"+ COLOR_RESET);
     }
 
     @Override
     public void registrarse(String nombre,String contrasenia,String direccion,int telefono,String mail,String metodoNotificacion){
-        System.out.println(COLOR_AMARILLO +"Advertencia: sesion ya iniciada\u001b[0m");
+        System.out.println(COLOR_AMARILLO +"Advertencia: sesion ya iniciada"+ COLOR_RESET);
     }
 
     @Override
@@ -36,27 +37,27 @@ public class Administrador extends Usuario{
 
     @Override
     public void verSaldo() {
-
+        System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
     }
 
     @Override
     public void confirmarCarrito() {
-
+        System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
     }
 
     @Override
     public void verEstadoPedido() {
-
+        System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
     }
 
     @Override
     public void cancelarPedido() {
-
+        System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
     }
 
     @Override
     public void confirmarPedido() {
-
+        System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
     }
 
     public void eliminarUsuario(String nombre) {
@@ -71,6 +72,7 @@ public class Administrador extends Usuario{
 
     @Override
     public Order getOrden() {
+        System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
         return null;
     }
 
