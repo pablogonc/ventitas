@@ -1,5 +1,6 @@
 package sesion;
 
+import apis.contacto.Contacto;
 import model.cart.Cart;
 import model.item.Producto;
 import model.sucursal.Sucursal;
@@ -32,9 +33,13 @@ public class Sesion {
     }
 
     public void addItem(Producto producto,Integer cantidad){
-        sucursal.validarStock(producto,cantidad);
-        sucursal.eliminarStock(producto,cantidad);
-        carrito.addItem(producto,cantidad);
+        if(sucursal.validarStock(producto,cantidad)){
+            sucursal.eliminarStock(producto,cantidad);
+            carrito.addItem(producto,cantidad);
+        }else{
+            System.out.println("No se pudo validar el stock del item. El stock no alcanza o no existe el item");
+        }
+
     }
 
     public void vaciarCarrito(){

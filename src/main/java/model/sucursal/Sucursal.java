@@ -47,9 +47,10 @@ public class Sucursal {
         }
     }
 
-    public void actualizarStock(Producto item, Integer cantidad){
+    public void eliminarStock(Producto item, Integer cantidad){
         if(stock.containsKey(item)){
-            stock.replace(item, cantidad);
+            int old = stock.get(item);
+            stock.replace(item, old - cantidad);
         }else{
             System.out.println("No se pudo actualizar el item. Debe agregarlo primero");
             //stock.put(item,cantidad);
@@ -71,5 +72,18 @@ public class Sucursal {
 
     public void setUbicacion(Ubicacion ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public boolean validarStock(Producto producto, Integer cantidad) {
+        if(stock.containsKey(producto)){
+            int old = stock.get(producto);
+                if(old >= cantidad){
+                    return true;
+                }else{
+                    return false;
+                }
+        }else{
+            return false;
+        }
     }
 }
