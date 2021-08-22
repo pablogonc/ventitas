@@ -1,6 +1,6 @@
 package model.user;
 
-import model.item.Producto;
+import apis.contacto.Contacto;
 import model.order.Order;
 import sesion.Sesion;
 
@@ -15,7 +15,7 @@ public abstract class Usuario {
         return sesion;
     }
 
-    public abstract Contacto iniciarSesion(String nombre,String contrasenia);
+    public abstract void iniciarSesion(String nombre, String contrasenia);
 
     public abstract void registrarse(String nombre,String contrasenia,String direccion,int telefono,String mail,String metodoNotificacion);
 

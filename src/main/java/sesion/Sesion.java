@@ -20,6 +20,10 @@ public class Sesion {
         carrito = new Cart();
     }
 
+    public Usuario getUsuario(){
+        return this.usuario;
+    }
+
     public void setContacto(Contacto contacto){
         this.contacto = contacto;
     }
