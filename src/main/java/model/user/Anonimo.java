@@ -22,7 +22,9 @@ public class Anonimo extends Usuario {
         UsuarioDAO oUsuario = new UsuarioDAO();
 
         getSesion().setUsuario(oUsuario.iniciarSesion(getSesion(),nombre,contrasenia));
-      //  getSesion().setUsuario(new Normal(getSesion(),nombre));
+        getSesion().setContacto(oUsuario.getContacto(nombre));
+
+
     }
 
     @Override
@@ -31,12 +33,13 @@ public class Anonimo extends Usuario {
         if(oUsuario.esValido(usuario)){
             System.out.println(COLOR_VERDE + "El usuario es valido"+ COLOR_RESET);
 
-            int id = oUsuario.registrarse(usuario,contrasenia,direccion,telefono,mail,metodoNotificacion);
+            int id = oUsuario.registrarUsuario(usuario,contrasenia,direccion,telefono,mail,metodoNotificacion);
 
-            getSesion().setUsuario( new Normal( getSesion(),id,usuario,direccion,telefono,mail,metodoNotificacion ) );
-
+            getSesion().setUsuario( new Normal( getSesion()));
+            getSesion().setContacto(oUsuario.getContacto(usuario));
         }else {
             System.out.println(COLOR_ROJO + "El usuario no es valido" + COLOR_RESET);
+
         }
 
 
@@ -74,8 +77,13 @@ public class Anonimo extends Usuario {
     }
 
     @Override
-    public void eliminarUsuario(int id)  {
-        System.out.println(COLOR_ROJO + "error usted no puede eliminar usuarios" + COLOR_RESET);
+    public void eliminarUsuario(String nombre)  {
+        System.out.println(COLOR_ROJO + "Error usted no puede eliminar usuarios" + COLOR_RESET);
+    }
+
+    @Override
+    public void notificar() {
+
     }
 
     @Override
@@ -83,8 +91,5 @@ public class Anonimo extends Usuario {
         return null;
     }
 
-    @Override
-    public void eliminarUsuario() {
-
     }
-}
+

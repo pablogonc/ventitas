@@ -1,6 +1,6 @@
 package model.user;
 
-import apis.contacto.Contacto;
+
 import model.order.Order;
 import sesion.Sesion;
 
@@ -31,11 +31,10 @@ public abstract class Usuario {
 
     public abstract void confirmarPedido();
 
-    public abstract void eliminarUsuario(int id) ;
-
     public abstract Order getOrden();
 
-    public abstract void eliminarUsuario();
+    public abstract void eliminarUsuario(String nombre);
 
-    public void notificar(){}
+
+    public abstract void notificar();
 }

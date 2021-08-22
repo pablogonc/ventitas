@@ -1,7 +1,8 @@
 package userDAO;
 
-import Tests.Persona;
+import apis.locationService.LocationService;
 import model.user.Administrador;
+import model.user.Contacto;
 import model.user.Normal;
 import model.user.Usuario;
 import sesion.Sesion;
@@ -35,7 +36,7 @@ public class UsuarioDAO {
     }
 
     public boolean esValido(String usuario){
-        String consulta = "SELECT COUNT(*) AS cantidad FROM usuario WHERE usuario = '" + usuario + "';";
+        String consulta = "SELECT COUNT(*) AS cantidad FROM usuario WHERE nombreUsuario = '" + usuario + "';";
         try {
             this.conn = newConnection();
 
@@ -56,9 +57,11 @@ public class UsuarioDAO {
 
     }
 
-    public int registrarse(String nombre,String contrasenia,String direccion,int telefono,String mail,String metodoNotificacion) {
+    public int registrarUsuario(String nombre,String contrasenia,String direccion,int telefono,String mail,String metodoNotificacion) {
 
-        String consulta = "insert into usuario values (null,'" + nombre + "','" + contrasenia + "','" + direccion + "'," + telefono +",'" + mail +"','" + metodoNotificacion +"',false);" ;
+        int idContacto = registrarContacto(direccion, telefono, mail, metodoNotificacion);
+
+        String consulta = "insert into usuario values (null,"+idContacto  +",'" + nombre + "','" + contrasenia + "',false);" ;
 
         try {
 
@@ -87,8 +90,37 @@ public class UsuarioDAO {
 
     }
 
+    public int registrarContacto(String direccion,int telefono,String mail,String metodoNotificacion){
+        String consulta = "insert into contacto values (null,'"  + direccion + "'," + telefono +",'" + mail +"','" + metodoNotificacion +"');";
+        try {
+
+            this.conn = newConnection();
+
+            // Ejecuci�n
+            PreparedStatement stmt = this.conn.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
+
+            // execute the preparedstatement
+            stmt.executeUpdate();
+
+            // obtener �ltimo id generado
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next())
+                return generatedKeys.getInt(1);
+            else
+                return 0;
+
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error en Insert");
+            return 0;
+        }
+
+    }
+
     public Usuario iniciarSesion(Sesion sesion, String nombre, String contrasenia) {
-        String consulta = "select * from usuario  where usuario='"+nombre+"' and contrasenia = '" + contrasenia + "';" ;
+        String consulta = "select * from usuario U,contacto C  where C.idcontacto = U.idContacto and nombreUsuario='"+nombre+"' and contrasenia = '" + contrasenia + "';" ;
 
         try {
             this.conn = newConnection();
@@ -102,22 +134,9 @@ public class UsuarioDAO {
 
 
             if(rs.getBoolean("esAdmin")){
-                usuario= new Administrador(sesion,
-                        rs.getInt("idUsuario"),
-                        nombre,
-                        rs.getString("direccion"),
-                        rs.getInt("telefono"),
-                        rs.getString("mail"),
-                        rs.getString("notificacion"));
+                usuario= new Administrador(sesion);
             }else{
-                usuario = new Normal(sesion,
-                        rs.getInt("idUsuario"),
-                        nombre,
-                        rs.getString("direccion"),
-                        rs.getInt("telefono"),
-                        rs.getString("mail"),
-                        rs.getString("notificacion")
-                );
+                usuario = new Normal(sesion);
             }
 
             return usuario;
@@ -130,9 +149,41 @@ public class UsuarioDAO {
         }
 
     }
+    public Contacto getContacto(String nombre ) {
+        Contacto contacto;
+        String consulta = "select C.* from usuario U,contacto C  where C.idcontacto = U.idContacto and nombreUsuario='"+nombre+"';" ;
+        try {
+            this.conn = newConnection();
 
-    public void elimininar(int id) {
-        String consulta = "DELETE FROM usuario WHERE idUsuario = " + id + ";";
+            // Ejecucion
+            Statement stmt = this.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            rs.next();  // TODO chequear
+            Usuario usuario;
+
+            contacto= new Contacto(
+                        nombre,
+                        LocationService.getUbicacion(rs.getString("direccion")) ,
+                        rs.getInt("telefono"),
+                        rs.getString("mail"),
+                        rs.getString("notificacion")
+
+            );
+
+
+            return contacto;
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error," + ex);
+            return null;
+        }
+
+    }
+    public void elimininar(String nombre) {
+        String consulta = "DELETE U.*, C.* FROM usuario U LEFT JOIN contacto C ON C.idContacto = U.idContacto  WHERE U.nombreUsuario = '" + nombre + "';";
 
         try {
             this.conn = newConnection();

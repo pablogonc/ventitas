@@ -1,35 +1,30 @@
 package sesion;
 
-import apis.contacto.Contacto;
+
+import lombok.Data;
 import model.cart.Cart;
 import model.item.Producto;
+import model.order.Order;
 import model.sucursal.Sucursal;
 import model.user.Anonimo;
+import model.user.Contacto;
 import model.user.Usuario;
 
+import java.util.List;
+
+@Data
 public class Sesion {
     private Contacto contacto;
     private Sucursal sucursal;
     private Cart carrito;
     private Usuario usuario;
+    private List<Order> ordenes;
 
     public Sesion(Sucursal sucursal) {
         this.contacto = null;
         this.sucursal = sucursal;
         this.usuario = new Anonimo(this);
         carrito = new Cart();
-    }
-
-    public Usuario getUsuario(){
-        return this.usuario;
-    }
-
-    public void setContacto(Contacto contacto){
-        this.contacto = contacto;
-    }
-
-    public void setUsuario(Usuario usuario){
-        this.usuario = usuario;
     }
 
     public void seleccionarSucursal(Sucursal sucursal2){
@@ -52,4 +47,6 @@ public class Sesion {
         }
         carrito = new Cart();
     }
+
+
 }

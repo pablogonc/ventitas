@@ -1,6 +1,11 @@
 package model.sucursal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 
 public class Ubicacion {
     @JsonProperty("title")
@@ -10,35 +15,6 @@ public class Ubicacion {
     @JsonProperty("lng")
     private double longitud;
 
-    public Ubicacion(String direccion, double latitud, double longitud) {
-        this.direccion = direccion;
-        this.latitud = latitud;
-        this.longitud = longitud;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public double getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
-    }
-
-    public double getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
-    }
 
     private double radianes(double num){
         return num * Math.PI /180;

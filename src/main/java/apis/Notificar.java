@@ -1,9 +1,9 @@
 package apis;
 
-import model.user.Normal;
+import model.user.Contacto;
 
 public interface Notificar {
 
-    void notificar(Normal usuario);
+    void notificar(Contacto contacto);
 
 }

@@ -2,6 +2,7 @@ package apis;
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
+import model.user.Contacto;
 import model.user.Normal;
 
 public class NotificarXWPP implements Notificar{
@@ -10,7 +11,7 @@ public class NotificarXWPP implements Notificar{
     public static final String AUTH_TOKEN = "2fddec75963132e73f1e3327c3b54923";
 
     @Override
-    public void notificar(Normal usuario) {
+    public void notificar(Contacto usuario) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
                 new com.twilio.type.PhoneNumber("whatsapp:+54" +  usuario.getTelefono()),

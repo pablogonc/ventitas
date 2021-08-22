@@ -1,5 +1,6 @@
 package apis;
 
+import model.user.Contacto;
 import model.user.Normal;
 
 import javax.mail.*;
@@ -10,7 +11,7 @@ import java.util.Properties;
 public class NotificarXEMAIL implements Notificar{
 
     @Override
-    public void notificar(Normal usuario) {
+    public void notificar(Contacto usuario) {
 
         final String username = "ventitasSA425@gmail.com";
         final String password = "ventitas1234";

@@ -10,7 +10,10 @@ public class VentitasTests extends Recursos {
     {
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
-        sesion.getUsuario().registrarse("steven","123","jonte 2551",455528542,"stevenhca12@gmail.com","mail");
+
+        sesion.getUsuario().registrarse("pabloo","123","jonte 2551",455528542,"goncalves.pab@gmail.com","mail");
+
+        sesion.getUsuario().notificar();
 
     }
 
@@ -19,7 +22,10 @@ public class VentitasTests extends Recursos {
     {
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
-        sesion.getUsuario().iniciarSesion("steven","123");
+
+
+        sesion.getUsuario().iniciarSesion("pabloo","123");
+
         sesion.getUsuario().notificar();
     }
 
@@ -28,8 +34,10 @@ public class VentitasTests extends Recursos {
     {
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
+
         sesion.getUsuario().iniciarSesion("admin","1234");
-        sesion.getUsuario().eliminarUsuario(9);
+
+        sesion.getUsuario().eliminarUsuario("pabloo");
 
     }
 
