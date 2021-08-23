@@ -76,7 +76,7 @@ public class Normal extends Usuario implements Observador {
     public void eliminarUsuario(String nombre) {
         UsuarioDAO oUsuario = new UsuarioDAO();
         if (nombre.equals(getSesion().getContacto().getNombreDeUsuario())){
-            oUsuario.elimininar(nombre);
+            oUsuario.eliminar(nombre);
         }else{
             System.out.println(COLOR_ROJO + "Error usted no tiene permiso de eliminar otros usuarios" + COLOR_RESET);
         }

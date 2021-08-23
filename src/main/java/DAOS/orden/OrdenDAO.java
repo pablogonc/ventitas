@@ -56,7 +56,7 @@ public class OrdenDAO {
 
     }
 
-    public void elimininar(Integer id) {
+    public void eliminar(Integer id) {
         String consulta = "DELETE FROM orden WHERE idOrden = '" + id + "';";
 
         try {

@@ -191,7 +191,7 @@ public class UsuarioDAO {
         }
 
     }
-    public void elimininar(String nombre) {
+    public void eliminar(String nombre) {
         String consulta = "DELETE U.*, C.* FROM usuario U LEFT JOIN contacto C ON C.idContacto = U.idContacto  WHERE U.nombreUsuario = '" + nombre + "';";
 
         try {

@@ -58,7 +58,7 @@ public class Administrador extends Usuario implements Observador {
 
     public void eliminarUsuario(String nombre) {
         UsuarioDAO oUsuario = new UsuarioDAO();
-        oUsuario.elimininar(nombre);
+        oUsuario.eliminar(nombre);
     }
 
     @Override
