@@ -16,6 +16,7 @@ idUsuario int auto_increment,
 idContacto int,
 nombreUsuario varchar(20),
 contrasenia varchar(20),
+saldo float,
 esAdmin boolean,
 CONSTRAINT PK_usuario PRIMARY KEY (idUsuario),
 CONSTRAINT FK_usuario FOREIGN KEY (idContacto) REFERENCES contacto(idContacto)
@@ -107,9 +108,9 @@ insert into contacto values
 (3,"medrano 2040",4452421,"goncalves.pab@gmail.com","mail");
 
 insert into usuario values
-(null,1,"juan","1234",false),
-(null,2,"admin","1234",true),
-(null,3,"pablo","1234",false);
+(null,1,"juan","1234",458,false),
+(null,2,"admin","1234",850,true),
+(null,3,"pablo","1234",1350,false);
 
 
 

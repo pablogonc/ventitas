@@ -24,7 +24,7 @@ public class VentitasTests extends Recursos {
 
 
         sesion.getUsuario().iniciarSesion("pabloo","123");
-
+        sesion.getUsuario().notificar("hola");
     }
 
     @Test
@@ -44,7 +44,7 @@ public class VentitasTests extends Recursos {
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
 
-        sesion.getUsuario().iniciarSesion("admin","1234");
+        sesion.getUsuario().iniciarSesion("juan","1234");
 
         sesion.getUsuario().verSaldo();
 
