@@ -57,8 +57,9 @@ public class Anonimo extends Usuario {
     }
 
     @Override
-    public void confirmarCarrito() {
+    public Order confirmarCarrito() {
         solicitarInicioDeSesion();
+        return null;
     }
 
     @Override

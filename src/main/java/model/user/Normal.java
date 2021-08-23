@@ -89,16 +89,18 @@ public class Normal extends Usuario implements Observador {
     }
 
     @Override
-    public void confirmarCarrito() {
+    public Order confirmarCarrito() {
         Ubicacion destino = getSesion().getContacto().getUbicacion();
 
         float precioEnvio = getSesion().getSucursal().getPrecioEnvio(destino);
 
-        getSesion().addOrden(getSesion().getCarrito().confirmarCarrito(this,precioEnvio)); //todo ¿registrar en base?
+        Order orden = getSesion().getCarrito().confirmarCarrito(this,precioEnvio);
+        getSesion().addOrden(orden); //todo ¿registrar en base?
         float precio =  getSesion().getCarrito().obtenerPrecio();
         float saldo =  getSesion().getSaldo();
         getSesion().setSaldo( (saldo>precio)?saldo-precio:0 );
 
+        return  orden;
     }
 
 

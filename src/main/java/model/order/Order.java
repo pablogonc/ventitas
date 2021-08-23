@@ -31,6 +31,7 @@ public class Order  {
     private administradorDeEventos eventos;
     private Sucursal sucursal;
     private float descuento;
+
     public Order(Normal usuario, Cart carrito, Float shippingPrice){
         this.items = carrito.obtenerItems();
         this.precio = carrito.obtenerPrecio();
@@ -42,11 +43,11 @@ public class Order  {
         this.eventos = new administradorDeEventos("pedido confirmado","pedido en camino");
         this.sucursal = usuario.getSesion().getSucursal();
         this.eventos.suscribir("pedido en camino", usuario);
-        for (Administrador encargado : sucursal.getEncargados()) {
-            this.eventos.suscribir("pedido confirmado",encargado);
-        }
 
+    }
 
+    public void asignarVendedor(Administrador vendedor){
+        this.eventos.suscribir("pedido confirmado",vendedor);
     }
 
     public void showOrder(){
@@ -87,10 +88,10 @@ public class Order  {
         // subir a la base de datos
         //todo
         // avisar a un admin de la sucursal
-        eventos.notificar("pedido confirmado",sucursal.getUbicacion().getDireccion(),destino.getDireccion()); //ver otros datos para poner
+        eventos.notificar("pedido confirmado","pedido confirmado",sucursal.getUbicacion().getDireccion(),destino.getDireccion()); //ver otros datos para poner
     }
     public void enviar(){
-        eventos.notificar("pedido en camino",sucursal.getUbicacion().getDireccion(),destino.getDireccion()); //ver otros datos para poner
+        eventos.notificar("pedido en camino","pedido confirmado",sucursal.getUbicacion().getDireccion(),destino.getDireccion()); //ver otros datos para poner
     }
 
 

@@ -1,4 +1,5 @@
 import apis.locationService.LocationService;
+import model.order.Order;
 import model.sucursal.Ubicacion;
 import sesion.Sesion;
 import org.junit.Test;
@@ -114,13 +115,12 @@ public class VentitasTests extends Recursos {
 
         sesion.getUsuario().iniciarSesion("juan","1234");
         sesion.getUsuario().verSaldo();
-        sesion.getUsuario().confirmarCarrito();
+        Order orden = sesion.getUsuario().confirmarCarrito();
+        orden.asignarVendedor(adminMedrano);
         sesion.getUsuario().verSaldo();
         sesion.getUsuario().verEstadoPedido();
 
-
-        sesion.getOrdenes().get(0).confirmarOrden();
-
+        orden.confirmarOrden();
 
 
         sesion.getOrdenes().get(0).enviar();

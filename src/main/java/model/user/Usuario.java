@@ -23,7 +23,7 @@ public abstract class Usuario {
 
     public abstract void verSaldo();
 
-    public abstract void confirmarCarrito();
+    public abstract Order confirmarCarrito();
 
     public abstract void verEstadoPedido();
 

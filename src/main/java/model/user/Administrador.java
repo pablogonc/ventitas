@@ -36,8 +36,9 @@ public class Administrador extends Usuario implements Observador {
     }
 
     @Override
-    public void confirmarCarrito() {
+    public Order confirmarCarrito() {
         System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
+        return null;
     }
 
     @Override

@@ -5,12 +5,7 @@ import model.sucursal.Sucursal;
 import model.sucursal.Ubicacion;
 import model.user.Administrador;
 import model.user.Contacto;
-import model.user.Normal;
-import model.user.Usuario;
 import sesion.Sesion;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Recursos {
 
@@ -64,19 +59,22 @@ public class Recursos {
     protected Sucursal sucursalMEdrano;
     protected Sucursal sucursalMozart;
 
+    //Admins
+    protected Administrador adminMedrano;
+    protected Administrador adminMozrt;
+
     public void iniciarSucursales(){ //todo
         Ubicacion medrano= new Ubicacion("Av. Medrano 951, C1179 AAQ, Buenos Aires",-34.59859412721525d ,-58.41992119079607d );
 
         Sesion sesiona= new Sesion(null);
         Contacto c= new Contacto("adminMedrano", LocationService.getUbicacion("medrano 1251"),424225,"goncalves.pab@gmail.com","mail");
-        Administrador usera = new Administrador(sesiona);
-        sesiona.setUsuario(usera);
+        adminMedrano = new Administrador(sesiona);
+        sesiona.setUsuario(adminMedrano);
         sesiona.setContacto(c);
-        List <Administrador> adminsListA =  new ArrayList<>();
-        adminsListA.add(usera);
-        sucursalMEdrano = new Sucursal(1,medrano,adminsListA ,1148677500);
-
+        sucursalMEdrano = new Sucursal(1,medrano ,1148677500);
+        sucursalMEdrano.agregarEncaragado("Todo",adminMedrano);
         sucursalMEdrano.agregarArticulo(consola,4);
+
         sucursalMEdrano.agregarArticulo(homeTheather,10);
         sucursalMEdrano.agregarArticulo(tv,3);
         sucursalMEdrano.agregarArticulo(controlConsola,1);
@@ -90,19 +88,17 @@ public class Recursos {
 
 
         Sesion sesionb= new Sesion(null);
-        Contacto c2= new Contacto("adminMozart", LocationService.getUbicacion("medrano 1251"),424225,"goncalves.pab@gmail.com","mail");
-        Administrador userb = new Administrador(sesionb);
-        sesionb.setUsuario(userb);
+        Contacto c2= new Contacto("adminMozart", LocationService.getUbicacion("medrano 1251"),424225,"stevenhca12@gmail.com","mail");
+        adminMozrt = new Administrador(sesionb);
+        sesionb.setUsuario(adminMozrt);
         sesionb.setContacto(c2);
 
-        List <Administrador> adminsListB =  new ArrayList<>();
-        adminsListB.add(userb);
 
         Ubicacion mozart = new Ubicacion("Mozart 2300, C1407 CABA",-34.65927096597888d ,-58.4673399745992d );
-        sucursalMozart = new Sucursal(1,mozart,adminsListB,1148677500);
-
+        sucursalMozart = new Sucursal(1,mozart,1148677500);
+        sucursalMozart.agregarEncaragado("Todo",adminMozrt);
         sesionb.setSucursal(sucursalMozart);
-
+        sucursalMEdrano.agregarEncaragado(consola.getNombre(),adminMozrt);
     }
 
     public void iniciarArticulos(){

@@ -17,28 +17,27 @@ import static utilidades.Utilidades.COLOR_RESET;
 public class Sucursal {
     private Integer id;
     private Ubicacion ubicacion;
-    private List<Administrador> encargados;
     private Integer telefono;
     private Map<Producto,Integer> stock;
     private List<Order> orders;
     private administradorDeEventos eventos;
 
-    public Sucursal(Integer id, Ubicacion ubicacion,  List<Administrador> encargados, Integer telefono){
+    public Sucursal(Integer id, Ubicacion ubicacion, Integer telefono){
         this.id = id;
         this.ubicacion = ubicacion;
-        this.encargados = encargados;
         this.telefono = telefono;
         this.stock = new HashMap<>();
         this.orders = new ArrayList<>();
-        eventos = new administradorDeEventos("stock");
-        for (Administrador encargado : encargados) {
-            eventos.suscribir("stock",encargado);
-        }
+        eventos = new administradorDeEventos("Todo");
 
     }
 
-    public List<Administrador> getEncargados() {
-        return encargados;
+    public void agregarEncaragado(String articulo,Administrador encargado){ //si dice "todo" controla todo el stock, si no uno en particular
+        eventos.suscribir(articulo,encargado);
+    }
+
+    public void eliminarEncaragado(String articulo,Administrador encargado){
+        eventos.desuscribir(articulo,encargado);
     }
 
     public void agregarArticulo(Producto item, Integer cantidad){
@@ -48,6 +47,7 @@ public class Sucursal {
                 int old = stock.get(item);
                 stock.replace(item, old + cantidad);
             }else{
+                eventos.agregarOperacion(item.getNombre());
                 stock.put(item,cantidad);
             }
         //}
@@ -69,7 +69,8 @@ public class Sucursal {
             stock.replace(item, old - cantidad);
 
             if (stock.get(item) == 0){
-                eventos.notificar("stock",item.getNombre(),ubicacion.getDireccion());
+                eventos.notificar("Todo","stock",item.getNombre(),ubicacion.getDireccion());
+                eventos.notificar(item.getNombre(),"stock",item.getNombre(),ubicacion.getDireccion());
             }
 
         }else{
