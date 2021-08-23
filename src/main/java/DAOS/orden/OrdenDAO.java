@@ -2,7 +2,7 @@ package DAOS.orden;
 
 import java.sql.*;
 
-public class OrdenDAO {
+public class ordenDAO {
     private Connection conn;
 
     public Connection newConnection() {
