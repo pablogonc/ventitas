@@ -22,7 +22,6 @@ public class VentitasTests extends Recursos {
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
 
-
         sesion.getUsuario().iniciarSesion("pabloo","123");
         sesion.getUsuario().notificar("hola");
     }

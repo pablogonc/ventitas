@@ -1,4 +1,4 @@
-package userDAO;
+package DAOS.userDAO;
 
 public class UsuarioMapper {
 }

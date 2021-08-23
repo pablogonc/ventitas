@@ -1,14 +1,8 @@
 package model.user;
 
-import apis.locationService.LocationService;
-import apis.Notificar;
-import apis.NotificarXEMAIL;
-import apis.NotificarXSMS;
-import apis.NotificarXWPP;
 import sistema.Observador;
-import userDAO.UsuarioDAO;
+import DAOS.userDAO.UsuarioDAO;
 import model.order.Order;
-import model.sucursal.Ubicacion;
 import sesion.Sesion;
 
 import static utilidades.Utilidades.COLOR_AMARILLO;

@@ -1,4 +1,4 @@
-package userDAO;
+package DAOS.userDAO;
 
 import apis.locationService.LocationService;
 import model.user.Administrador;

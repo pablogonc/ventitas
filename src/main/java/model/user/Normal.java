@@ -3,7 +3,7 @@ package model.user;
 
 import model.sucursal.Ubicacion;
 import sistema.Observador;
-import userDAO.UsuarioDAO;
+import DAOS.userDAO.UsuarioDAO;
 import model.order.Order;
 import sesion.Sesion;
 
