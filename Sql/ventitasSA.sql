@@ -30,36 +30,6 @@ mail varchar(40),
 CONSTRAINT PK_sucursal PRIMARY KEY (idSucursal)
 )ENGINE = InnoDB;
 
-CREATE TABLE articulo(
-idArticulo int auto_increment,
-nombre varchar(30),
-marca varchar(30),
-descripcion varchar(30),
-precio float,
-CONSTRAINT PK_articulo PRIMARY KEY (idArticulo)
-)ENGINE = InnoDB;
-
-/* NO relacional
-CREATE TABLE carrito(
-idContacto int auto_increment,
-direccion varchar(20),
-telefono int,
-mail varchar(40),
-notificacion varchar(20),
-CONSTRAINT PK_contacto PRIMARY KEY (idContacto)
-)ENGINE = InnoDB;
-*/
-/* NO relacional
-CREATE TABLE stock(
-idContacto int auto_increment,
-direccion varchar(20),
-telefono int,
-mail varchar(40),
-notificacion varchar(20),
-CONSTRAINT PK_contacto PRIMARY KEY (idContacto)
-)ENGINE = InnoDB;
-*/
-
 CREATE TABLE adminSucursal(
 idUsuarioSucursal int auto_increment,
 idUsuario int,
@@ -68,7 +38,6 @@ CONSTRAINT PK_adminSucursal PRIMARY KEY (idUsuarioSucursal),
 CONSTRAINT FK_adminSucursal_usuario FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario),
 CONSTRAINT FK_adminSucursal_sucursal FOREIGN KEY (idSucursal) REFERENCES sucursal(idSucursal)
 )ENGINE = InnoDB;
-
 
 CREATE TABLE orden(
 idOrden int auto_increment,
@@ -87,20 +56,20 @@ idArticuloXorden int,
 idOrden int,
 idArticulo int,
 CONSTRAINT articuloXorden PRIMARY KEY (idOrden),
-CONSTRAINT FK_articuloXorden_articulo FOREIGN KEY (idArticulo) REFERENCES articulo(idArticulo),
 CONSTRAINT FK_articuloXorden_orden FOREIGN KEY (idOrden) REFERENCES orden(idOrden)
 )ENGINE = InnoDB;
 
-
+CREATE TABLE articuloXsucursal(
+idArticuloXsucursal int,
+idSucursal int,
+idArticulo int,
+CONSTRAINT PK_articuloXsucursal PRIMARY KEY (idArticuloXsucursal),
+CONSTRAINT FK_articuloXsucursal_sucursal FOREIGN KEY (idSucursal) REFERENCES sucursal(idSucursal)
+)ENGINE = InnoDB;
 
 insert into sucursal values
 (1,"Av. Medrano 951, C1179 AAQ, Buenos Aires",4452421,"medrano@gmail.com"),
 (2,"Mozart 2300, C1407 CABA",4452421,"mozart@gmail.com");
-
-insert into articulo values
-(1,"PlayStation 4","sony","consola de juego",88999),
-(2,"Dualshock 4","sony","control",10397),
-(3,"Uncharted 4","Naughty Dog","para ps4",2299);
 
 insert into contacto values
 (1,"medrano 2040",4452421,"goncalves.pab@gmail.com","mail"),
