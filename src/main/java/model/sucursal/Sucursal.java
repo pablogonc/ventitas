@@ -1,5 +1,7 @@
 package model.sucursal;
 
+import DAOS.sucursalDAO.sucursalDAO;
+import lombok.Data;
 import model.item.Producto;
 import model.order.Order;
 import model.user.Administrador;
@@ -13,7 +15,7 @@ import java.util.Map;
 
 import static utilidades.Utilidades.COLOR_CYAN;
 import static utilidades.Utilidades.COLOR_RESET;
-
+@Data
 public class Sucursal {
     private Integer id;
     private Ubicacion ubicacion;
@@ -30,6 +32,28 @@ public class Sucursal {
         this.orders = new ArrayList<>();
         eventos = new administradorDeEventos("Todo");
 
+    }
+    public Sucursal(Ubicacion ubicacion, Integer telefono){ //crea el objeto y lo registra en la base
+        sucursalDAO sucursaldao = new sucursalDAO();
+        this.id = sucursaldao.registrarSucursal(ubicacion,telefono);
+        this.ubicacion = ubicacion;
+        this.telefono = telefono;
+        this.stock = new HashMap<>();
+        this.orders = new ArrayList<>();
+        eventos = new administradorDeEventos("Todo");
+
+
+    }
+    public Sucursal(String direccion){ //instancia la sucursal a partir de la que esta en la base de datos
+        sucursalDAO sucursaldao = new sucursalDAO();
+        Sucursal temp = sucursaldao.obtenerSucursal(direccion);
+
+        this.id = temp.getId();
+        this.ubicacion = temp.getUbicacion();
+        this.telefono = temp.getTelefono();
+        this.stock = temp.getStock();
+        this.orders = temp.orders;
+        eventos = new administradorDeEventos("Todo");
     }
 
     public void agregarEncaragado(String articulo,Administrador encargado){ //si dice "todo" controla todo el stock, si no uno en particular

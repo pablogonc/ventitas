@@ -95,7 +95,7 @@ public class Recursos {
 
 
         Ubicacion mozart = new Ubicacion("Mozart 2300, C1407 CABA",-34.65927096597888d ,-58.4673399745992d );
-        sucursalMozart = new Sucursal(1,mozart,1148677500);
+        sucursalMozart = new Sucursal(2,mozart,1148677500);
         sucursalMozart.agregarEncaragado("Todo",adminMozrt);
         sesionb.setSucursal(sucursalMozart);
         sucursalMEdrano.agregarEncaragado(consola.getNombre(),adminMozrt);

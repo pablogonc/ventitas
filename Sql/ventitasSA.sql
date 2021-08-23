@@ -4,7 +4,7 @@ use VentitasSA;
 
 CREATE TABLE contacto(
 idContacto int auto_increment,
-direccion varchar(20),
+direccion varchar(100),
 telefono int,
 mail varchar(40),
 notificacion varchar(20),
@@ -24,9 +24,8 @@ CONSTRAINT FK_usuario FOREIGN KEY (idContacto) REFERENCES contacto(idContacto)
 
 CREATE TABLE sucursal(
 idSucursal int auto_increment,
-direccion varchar(20),
+direccion varchar(100),
 telefono int,
-mail varchar(40),
 CONSTRAINT PK_sucursal PRIMARY KEY (idSucursal)
 )ENGINE = InnoDB;
 
@@ -59,8 +58,8 @@ CONSTRAINT FK_articuloXsucursal_sucursal FOREIGN KEY (idSucursal) REFERENCES suc
 )ENGINE = InnoDB;
 
 insert into sucursal values
-(1,"Av. Medrano 951, C1179 AAQ, Buenos Aires",4452421,"medrano@gmail.com"),
-(2,"Mozart 2300, C1407 CABA",4452421,"mozart@gmail.com");
+(1,"Av. Medrano 951, C1179 AAQ, Buenos Aires",4452421),
+(2,"Mozart 2300, C1407 CABA",4452421);
 
 insert into contacto values
 (1,"medrano 2040",4452421,"goncalves.pab@gmail.com","mail"),

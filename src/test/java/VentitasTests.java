@@ -1,5 +1,6 @@
 import apis.locationService.LocationService;
 import model.order.Order;
+import model.sucursal.Sucursal;
 import model.sucursal.Ubicacion;
 import sesion.Sesion;
 import org.junit.Test;
@@ -124,6 +125,22 @@ public class VentitasTests extends Recursos {
 
 
         sesion.getOrdenes().get(0).enviar();
+    }
+
+    @Test
+    public void obtenerSucursal() {
+
+        Sucursal sucursal = new Sucursal("AV Medrano 951") ;
+
+        System.out.println("id: " + sucursal.getId());
+
 
     }
+    @Test
+    public void registrarSucursal() {
+        Sucursal sucursal = new Sucursal(LocationService.getUbicacion("AV Medrano 951"),234) ;
+
+        System.out.println("direccion: " + sucursal.getUbicacion().getDireccion());
+    }
+
 }
