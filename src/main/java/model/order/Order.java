@@ -4,6 +4,7 @@ import model.cart.Cart;
 import model.item.Producto;
 import model.sucursal.Sucursal;
 import model.sucursal.Ubicacion;
+import model.user.Administrador;
 import model.user.Contacto;
 import model.user.Normal;
 import model.user.Usuario;
@@ -29,19 +30,23 @@ public class Order  {
     private Boolean confirmado;
     private administradorDeEventos eventos;
     private Sucursal sucursal;
-
+    private float descuento;
     public Order(Normal usuario, Cart carrito, Float shippingPrice){
         this.items = carrito.obtenerItems();
         this.precio = carrito.obtenerPrecio();
         this.shippingPrice = shippingPrice;
+        this.descuento = (precio+shippingPrice-usuario.getSesion().getSaldo())<0?precio+shippingPrice:usuario.getSesion().getSaldo();
         this.destino = usuario.getSesion().getContacto().getUbicacion();
         DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         this.fechaPedido = LocalDateTime.now();
         this.eventos = new administradorDeEventos("pedido confirmado","pedido en camino");
         this.sucursal = usuario.getSesion().getSucursal();
         this.eventos.suscribir("pedido en camino", usuario);
-        this.eventos.suscribir("pedido confirmado",sucursal.getEncargado());
-        // todo calcular envio
+        for (Administrador encargado : sucursal.getEncargados()) {
+            this.eventos.suscribir("pedido confirmado",encargado);
+        }
+
+
     }
 
     public void showOrder(){
@@ -57,22 +62,23 @@ public class Order  {
 
         System.out.println(
                 String.format("%-20s", "Articulo")
-                        + String.format("%-15s", "Cantidad")
-                        + String.format("%-15s", "Precio U")
-                        + String.format("%-15s", "Total")
+                        + String.format("%-20s", "Cantidad")
+                        + String.format("%-20s", "Precio U")
+                        + String.format("%-20s", "Total")
         );
         items.stream().distinct().collect(Collectors.toList()).forEach((item) ->
 
                 System.out.println(COLOR_CYAN+
-                        String.format("%-29s", item.getNombre()) +COLOR_RESET
-                                + String.format("%-15s",("x"+ Collections.frequency(items,item)))
-                                + String.format("%-15s",("$"+ formatter.format(item.getPrecio())))
-                                + String.format("%-15s", ("$" +    formatter.format((item.getPrecio() * Collections.frequency(items,item)))  ))
+                        String.format("%-20s", item.getNombre()) +COLOR_RESET
+                                + String.format("%-20s",("x"+ Collections.frequency(items,item)))
+                                + String.format("%-20s",("$"+ formatter.format(item.getPrecio())))
+                                + String.format("%-20s", ("$" +    formatter.format((item.getPrecio() * Collections.frequency(items,item)))  ))
                 ));
         System.out.println("--------------------------- Totales ---------------------------");
         System.out.println("Precio de envio:    " + COLOR_AZUL + "$" +  formatter.format(shippingPrice) + COLOR_RESET);
         System.out.println("Total artículos:    " + COLOR_AZUL + "$" + formatter.format(precio) + COLOR_RESET);
-        System.out.println("Precio Final:       " + COLOR_VERDE + "$" + formatter.format((precio+shippingPrice)) + COLOR_RESET);
+        System.out.println("Descuento:          " + COLOR_VERDE + "$" + formatter.format(descuento) + COLOR_RESET);
+        System.out.println("Precio Final:       " + COLOR_ROJO + "$" + formatter.format((precio+shippingPrice-descuento)) + COLOR_RESET);
         System.out.println("\u001B[0m");
     }
 

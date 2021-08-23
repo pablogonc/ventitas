@@ -9,6 +9,9 @@ import model.user.Normal;
 import model.user.Usuario;
 import sesion.Sesion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Recursos {
 
     //items
@@ -69,8 +72,9 @@ public class Recursos {
         Administrador usera = new Administrador(sesiona);
         sesiona.setUsuario(usera);
         sesiona.setContacto(c);
-
-        sucursalMEdrano = new Sucursal(1,medrano, usera,1148677500);
+        List <Administrador> adminsListA =  new ArrayList<>();
+        adminsListA.add(usera);
+        sucursalMEdrano = new Sucursal(1,medrano,adminsListA ,1148677500);
 
         sucursalMEdrano.agregarArticulo(consola,4);
         sucursalMEdrano.agregarArticulo(homeTheather,10);
@@ -91,8 +95,11 @@ public class Recursos {
         sesionb.setUsuario(userb);
         sesionb.setContacto(c2);
 
+        List <Administrador> adminsListB =  new ArrayList<>();
+        adminsListB.add(userb);
+
         Ubicacion mozart = new Ubicacion("Mozart 2300, C1407 CABA",-34.65927096597888d ,-58.4673399745992d );
-        sucursalMozart = new Sucursal(1,mozart,userb,1148677500);
+        sucursalMozart = new Sucursal(1,mozart,adminsListB,1148677500);
 
         sesionb.setSucursal(sucursalMozart);
 

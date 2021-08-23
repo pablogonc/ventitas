@@ -44,7 +44,7 @@ public class VentitasTests extends Recursos {
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
 
-        sesion.getUsuario().iniciarSesion("juan","1234");
+        sesion.getUsuario().iniciarSesion("admin","1234");
 
         sesion.getUsuario().verSaldo();
 
@@ -113,13 +113,16 @@ public class VentitasTests extends Recursos {
         sesion.addItem(homeTheather,5); // se agota
         sesion.addItem(controlConsola,2); // ya no habia stock suficiente en sucursal
 
-        sesion.getUsuario().iniciarSesion("pablo","1234");
-
+        sesion.getUsuario().iniciarSesion("juan","1234");
+        sesion.getUsuario().verSaldo();
         sesion.getUsuario().confirmarCarrito();
-
+        sesion.getUsuario().verSaldo();
         sesion.getUsuario().verEstadoPedido();
 
+
         sesion.getOrdenes().get(0).confirmarOrden();
+
+
 
         sesion.getOrdenes().get(0).enviar();
 

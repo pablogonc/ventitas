@@ -103,12 +103,12 @@ insert into articulo values
 (3,"Uncharted 4","Naughty Dog","para ps4",2299);
 
 insert into contacto values
-(1,"medrano 2040",4452421,"juan@gmail.com","mail"),
+(1,"medrano 2040",4452421,"goncalves.pab@gmail.com","mail"),
 (2,"mozart 2040",44452421,"admin@gmail.com","mail"),
 (3,"medrano 2040",4452421,"goncalves.pab@gmail.com","mail");
 
 insert into usuario values
-(null,1,"juan","1234",458,false),
+(null,1,"juan","1234",458000,false),
 (null,2,"admin","1234",850,true),
 (null,3,"pablo","1234",1350,false);
 

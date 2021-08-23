@@ -55,8 +55,11 @@ public class Normal extends Usuario implements Observador {
     }
 
     @Override
-    public void cancelarPedido() {
-
+    public void cancelarPedido(/*Pedir Pedido*/) {
+        //todo
+        //enviar a sucursal para quitar pedido de la lista
+        //recuperar saldo y restarle comision (podria quedar negativo el saldo lo cual es un incremento para la proxima compra)
+        //mandar mail a admin de cancelacion de pedido
     }
 
     @Override
@@ -92,6 +95,10 @@ public class Normal extends Usuario implements Observador {
         float precioEnvio = getSesion().getSucursal().getPrecioEnvio(destino);
 
         getSesion().addOrden(getSesion().getCarrito().confirmarCarrito(this,precioEnvio)); //todo ¿registrar en base?
+        float precio =  getSesion().getCarrito().obtenerPrecio();
+        float saldo =  getSesion().getSaldo();
+        getSesion().setSaldo( (saldo>precio)?saldo-precio:0 );
+
     }
 
 

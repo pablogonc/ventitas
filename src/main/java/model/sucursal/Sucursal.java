@@ -17,25 +17,28 @@ import static utilidades.Utilidades.COLOR_RESET;
 public class Sucursal {
     private Integer id;
     private Ubicacion ubicacion;
-    private Administrador encargado;       //todo cambiarlo a un admin
+    private List<Administrador> encargados;
     private Integer telefono;
     private Map<Producto,Integer> stock;
     private List<Order> orders;
     private administradorDeEventos eventos;
 
-    public Sucursal(Integer id, Ubicacion ubicacion, Administrador encargado, Integer telefono){
+    public Sucursal(Integer id, Ubicacion ubicacion,  List<Administrador> encargados, Integer telefono){
         this.id = id;
         this.ubicacion = ubicacion;
-        this.encargado = encargado;
+        this.encargados = encargados;
         this.telefono = telefono;
         this.stock = new HashMap<>();
         this.orders = new ArrayList<>();
         eventos = new administradorDeEventos("stock");
-        eventos.suscribir("stock",encargado);
+        for (Administrador encargado : encargados) {
+            eventos.suscribir("stock",encargado);
+        }
+
     }
 
-    public Administrador getEncargado() {
-        return encargado;
+    public List<Administrador> getEncargados() {
+        return encargados;
     }
 
     public void agregarArticulo(Producto item, Integer cantidad){
