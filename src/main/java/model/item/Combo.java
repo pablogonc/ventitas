@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Combo implements Producto{
+    private int id;
     private List<Producto> productos;
     private Integer descuento;
     private String nombreCombo;
 
-    public Combo(String nombreCombo,Integer descuento) {
+    public Combo(int id,String nombreCombo,Integer descuento) {
+        this.id = id;
         this.nombreCombo = "\u001b[35m" + nombreCombo + "\u001b[0m";
         this.descuento = descuento;
         productos = new ArrayList<>();
@@ -49,6 +51,11 @@ public class Combo implements Producto{
 
         nombre.append("\u001b[0m)");
         return nombre.toString();
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override

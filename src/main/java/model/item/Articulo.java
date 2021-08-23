@@ -1,20 +1,16 @@
 package model.item;
 
+import lombok.AllArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@AllArgsConstructor
 public class Articulo implements Producto{
+    private int id;
     private String nombre;
     private String marca;
     private String descripcion;
     private float precio;
-
-    public Articulo(String nombre, String marca, String descripcion, float precio) {
-        this.nombre = nombre;
-        this.marca = marca;
-        this.descripcion = descripcion;
-        this.precio = precio;
-    }
 
     @Override
     public float getPrecio() {
@@ -24,6 +20,11 @@ public class Articulo implements Producto{
     @Override
     public String getNombre() {
         return nombre ;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override

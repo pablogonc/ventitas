@@ -30,15 +30,6 @@ mail varchar(40),
 CONSTRAINT PK_sucursal PRIMARY KEY (idSucursal)
 )ENGINE = InnoDB;
 
-CREATE TABLE adminSucursal(
-idUsuarioSucursal int auto_increment,
-idUsuario int,
-idSucursal int,
-CONSTRAINT PK_adminSucursal PRIMARY KEY (idUsuarioSucursal),
-CONSTRAINT FK_adminSucursal_usuario FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario),
-CONSTRAINT FK_adminSucursal_sucursal FOREIGN KEY (idSucursal) REFERENCES sucursal(idSucursal)
-)ENGINE = InnoDB;
-
 CREATE TABLE orden(
 idOrden int auto_increment,
 idScursal int,
