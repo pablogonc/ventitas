@@ -15,6 +15,7 @@ import java.util.List;
 
 @Data
 public class Sesion {
+    private Integer id;
     private Contacto contacto;
     private Sucursal sucursal;
     private Cart carrito;
@@ -24,12 +25,17 @@ public class Sesion {
 
 
     public Sesion(Sucursal sucursal) {
+        this.id = -1;
         this.contacto = null;
         this.sucursal = sucursal;
         this.usuario = new Anonimo(this);
         this.saldo = 0f;
         this.carrito = new Cart();
         ordenes = new ArrayList<>();
+    }
+
+    public void setId(Integer id){
+        this.id = id;
     }
 
     public void seleccionarSucursal(Sucursal sucursal2){

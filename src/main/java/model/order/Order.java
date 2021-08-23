@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 import static utilidades.Utilidades.*;
 
 public class Order  {
+    private Integer id;
     private List<Producto> items;
     private Float precio;
     private Float shippingPrice;

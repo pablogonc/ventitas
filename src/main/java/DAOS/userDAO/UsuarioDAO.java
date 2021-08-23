@@ -96,7 +96,7 @@ public class UsuarioDAO {
 
             this.conn = newConnection();
 
-            // Ejecuci�n
+            // Ejecución
             PreparedStatement stmt = this.conn.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
 
             // execute the preparedstatement
@@ -129,7 +129,7 @@ public class UsuarioDAO {
             Statement stmt = this.conn.createStatement();
             ResultSet rs = stmt.executeQuery(consulta);
 
-            rs.next();  // TODO chequear
+            rs.next();
             Usuario usuario;
 
 
@@ -140,6 +140,13 @@ public class UsuarioDAO {
             }
 
             sesion.setSaldo(rs.getFloat("saldo"));
+            Integer id;
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next())
+                 id = generatedKeys.getInt(1);
+            else
+                id = null;
+            sesion.setId(id);
 
             return usuario;
 

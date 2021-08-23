@@ -24,7 +24,6 @@ public class Anonimo extends Usuario {
         getSesion().setUsuario(oUsuario.iniciarSesion(getSesion(),nombre,contrasenia));
         getSesion().setContacto(oUsuario.getContacto(nombre));
 
-
     }
 
     @Override
