@@ -126,12 +126,14 @@ public class Recursos {
         comboJuego.agregarProducto(controlConsola);
         comboJuego.agregarProducto(juego);
 
+
         sillon = new Articulo(4,"Sillon ","Chenille ","comodo",27399f);
 
         comboLiving = new Combo(105,"Combo Livinig",10);//combo Living = combo cine + combo juego + sillon
         comboLiving.agregarProducto(comboCine);
         comboLiving.agregarProducto(comboJuego);
         comboLiving.agregarProducto(sillon);
+
 
         heladera = new Articulo(5,"Heladera","Gafa ","La heladera Gafa HGF387AFB cuenta con un EXTRA Freezer que permite una mayor capacidad de guardado y mejor organización de los congelados. El espacio para refrigerador cuenta con 254 litros y el freezer tiene un total de 120 litros para congelados. Su interior se encuentra dividida por diferentes compartimentos; crisper de frutas y verduras de acrílico de cristal de alta resistencia, estantes de rejilla removibles, cubetera y huevera. Cuenta con eficiencia energética A. Su sistema de descongelamiento automático facilita la limpieza del refrigerador. Además, su potencia de temperatura puede regularse dependiendo del tipo y cantidad de alimentos que se quieran conservar y la época del año.\n",72.999f);
 
@@ -180,9 +182,34 @@ public class Recursos {
         comboBanda.agregarProducto(bateria);
         comboBanda.agregarProducto(bajo);
 
-        //todo hay que poner todos
-        articulos.add(consola);
-        articulos.add(guitarra);
+
         articulos.add(tv);
+        articulos.add(homeTheather);
+        articulos.add(comboCine);
+        articulos.add(consola);
+        articulos.add(controlConsola);
+        articulos.add(juego);
+        articulos.add(comboJuego);
+        articulos.add(sillon);
+        articulos.add(comboLiving);
+        articulos.add(heladera);
+        articulos.add(notebook);
+        articulos.add(valija);
+        articulos.add(parlante);
+        articulos.add(paletaPadel);
+        articulos.add(pelotaDeTenis);
+        articulos.add(comboPaddle);
+        articulos.add(mouse);
+        articulos.add(teclado);
+        articulos.add(comboInput);
+        articulos.add(auricular);
+        articulos.add(pcEscritorio);
+        articulos.add(comboInputPC);
+        articulos.add(guitarra);
+        articulos.add(amplificador);
+        articulos.add(comboGuitarrista);
+        articulos.add(bateria);
+        articulos.add(bajo);
+        articulos.add(comboBanda);
     }
 }

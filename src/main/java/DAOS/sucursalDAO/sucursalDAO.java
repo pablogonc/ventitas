@@ -123,7 +123,7 @@ public class sucursalDAO {
 
     public void updateStock(int idsucursal,int idart,int stock) {
         String consulta = " update articuloXsucursal set stock= "+ stock +" where idSucursal =" + idsucursal + " and idArticulo="+ idart + ";" ;
-        System.out.println(consulta);
+
         try {
             this.conn = newConnection();
 
