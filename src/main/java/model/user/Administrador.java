@@ -7,8 +7,8 @@ import DAOS.userDAO.UsuarioDAO;
 import model.order.Order;
 import sesion.Sesion;
 
-import static utilidades.Utilidades.COLOR_AMARILLO;
-import static utilidades.Utilidades.COLOR_RESET;
+import static utilidades.Utilidades.*;
+import static utilidades.Utilidades.COLOR_ROJO;
 
 public class Administrador extends Usuario implements Observador {
 
@@ -88,6 +88,21 @@ public class Administrador extends Usuario implements Observador {
     @Override
     public void confirmarEnvio(Order orden) {
         orden.enviar();
+    }
+
+    @Override
+    public void registrarAdmin(String nombre, String contrasenia, String direccion, int telefono, String mail, String metodoNotificacion) {
+        UsuarioDAO oUsuario = new UsuarioDAO();
+        if(oUsuario.esValido(nombre)){
+            System.out.println(COLOR_VERDE + "El usuario es valido"+ COLOR_RESET);
+
+            oUsuario.registrarUsuarioAdmin(nombre,contrasenia,direccion,telefono,mail,metodoNotificacion);
+
+        }else {
+            System.out.println(COLOR_ROJO + "El usuario no es valido" + COLOR_RESET);
+
+        }
+
     }
 
 }

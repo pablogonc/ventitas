@@ -225,4 +225,35 @@ public class UsuarioDAO {
 
         }
     }
+
+    public int registrarUsuarioAdmin(String nombre, String contrasenia, String direccion, int telefono, String mail, String metodoNotificacion) {
+        int idContacto = registrarContacto(direccion, telefono, mail, metodoNotificacion);
+
+        String consulta = "insert into usuario values (null,"+idContacto  +",'" + nombre + "','" + contrasenia + "',0,true);" ;
+
+        try {
+
+            this.conn = newConnection();
+
+            // Ejecuci�n
+            PreparedStatement stmt = this.conn.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
+
+            // execute the preparedstatement
+            stmt.executeUpdate();
+
+            // obtener �ltimo id generado
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next())
+                return generatedKeys.getInt(1);
+            else
+                return 0;
+
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error en Insert");
+            return 0;
+        }
+    }
 }

@@ -11,6 +11,7 @@ public class VentitasTests extends Recursos {
     @Test
     public void RegistrarUsuario()
     {
+        iniciarArticulos();
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
 
@@ -18,10 +19,22 @@ public class VentitasTests extends Recursos {
 
 
     }
+    @Test
+    public void RegistrarUsuarioAdmin()
+    {
+        iniciarArticulos();
+        iniciarSucursales();
+        Sesion sesion = new Sesion(sucursalMEdrano);
 
+        sesion.getUsuario().iniciarSesion("adminMozart","1234");
+        sesion.getUsuario().registrarAdmin("adminNuevo","123","jonte 2551",455528542,"goncalves.pab@gmail.com","mail");
+
+
+    }
     @Test
     public void IniciarSesion()
     {
+        iniciarArticulos();
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
 
@@ -32,6 +45,7 @@ public class VentitasTests extends Recursos {
     @Test
     public void borrarUsuario()
     {
+        iniciarArticulos();
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
 
@@ -43,6 +57,7 @@ public class VentitasTests extends Recursos {
     @Test
     public void verSaldo()
     {
+        iniciarArticulos();
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
 

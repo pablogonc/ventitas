@@ -87,6 +87,11 @@ public class Normal extends Usuario implements Observador {
     }
 
     @Override
+    public void registrarAdmin(String nombre, String contrasenia, String direccion, int telefono, String mail, String metodoNotificacion) {
+        System.out.println( COLOR_ROJO + "Error usted no posee permisos para registrar administradores" + COLOR_RESET );
+    }
+
+    @Override
     public Order confirmarCarrito() {
         Ubicacion destino = getSesion().getContacto().getUbicacion();
 
