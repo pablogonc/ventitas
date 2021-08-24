@@ -82,6 +82,11 @@ public class Normal extends Usuario implements Observador {
     }
 
     @Override
+    public void confirmarEnvio(Order orden) {
+        System.out.println( COLOR_ROJO + "Error usted no posee permisos para confirmar envio" + COLOR_RESET );
+    }
+
+    @Override
     public Order confirmarCarrito() {
         Ubicacion destino = getSesion().getContacto().getUbicacion();
 

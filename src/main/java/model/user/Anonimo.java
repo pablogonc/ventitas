@@ -84,6 +84,11 @@ public class Anonimo extends Usuario {
     }
 
     @Override
+    public void confirmarEnvio(Order orden) {
+        System.out.println( COLOR_ROJO + "Error usted no posee permisos para confirmar envio" + COLOR_RESET );
+    }
+
+    @Override
     public Order getOrden() {
         solicitarInicioDeSesion();
         return null;

@@ -85,4 +85,9 @@ public class Administrador extends Usuario implements Observador {
         sucursal.agregarArticulo(producto,cantidad);
     }
 
+    @Override
+    public void confirmarEnvio(Order orden) {
+        orden.enviar();
+    }
+
 }

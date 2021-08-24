@@ -36,4 +36,6 @@ public abstract class Usuario {
     public abstract void notificar(String mensaje);
 
     public abstract void agregarStock(Sucursal sucursal, Producto producto, Integer cantidad);
+
+    public abstract void confirmarEnvio(Order orden);
 }
