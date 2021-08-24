@@ -1,7 +1,9 @@
 package model.user;
 
 
+import model.item.Producto;
 import model.order.Order;
+import model.sucursal.Sucursal;
 import sesion.Sesion;
 
 public abstract class Usuario {
@@ -32,4 +34,6 @@ public abstract class Usuario {
     public abstract void eliminarUsuario(String nombre);
 
     public abstract void notificar(String mensaje);
+
+    public abstract void agregarStock(Sucursal sucursal, Producto producto, Integer cantidad);
 }

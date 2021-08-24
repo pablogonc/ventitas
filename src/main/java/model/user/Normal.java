@@ -2,6 +2,8 @@ package model.user;
 
 
 import DAOS.orden.OrdenDAO;
+import model.item.Producto;
+import model.sucursal.Sucursal;
 import model.sucursal.Ubicacion;
 import sistema.Observador;
 import DAOS.userDAO.UsuarioDAO;
@@ -72,6 +74,11 @@ public class Normal extends Usuario implements Observador {
     @Override
     public void notificar(String mensaje) {
         getSesion().getContacto().notificar(mensaje);
+    }
+
+    @Override
+    public void agregarStock(Sucursal sucursal, Producto producto, Integer cantidad) {
+        System.out.println( COLOR_ROJO + "Error usted no posee permisos para modificar el stock" + COLOR_RESET );
     }
 
     @Override

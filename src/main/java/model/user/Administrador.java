@@ -1,5 +1,7 @@
 package model.user;
 
+import model.item.Producto;
+import model.sucursal.Sucursal;
 import sistema.Observador;
 import DAOS.userDAO.UsuarioDAO;
 import model.order.Order;
@@ -78,5 +80,9 @@ public class Administrador extends Usuario implements Observador {
 
     }
 
+    @Override
+    public void agregarStock(Sucursal sucursal, Producto producto, Integer cantidad){
+        sucursal.agregarArticulo(producto,cantidad);
+    }
 
 }

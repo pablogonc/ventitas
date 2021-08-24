@@ -1,7 +1,9 @@
 package model.user;
 
 import DAOS.userDAO.UsuarioDAO;
+import model.item.Producto;
 import model.order.Order;
+import model.sucursal.Sucursal;
 import sesion.Sesion;
 
 import static utilidades.Utilidades.*;
@@ -74,6 +76,11 @@ public class Anonimo extends Usuario {
     @Override
     public void notificar(String mensaje) {
         solicitarInicioDeSesion();
+    }
+
+    @Override
+    public void agregarStock(Sucursal sucursal, Producto producto, Integer cantidad) {
+        System.out.println( COLOR_ROJO + "Error usted no posee permisos para modificar el stock" + COLOR_RESET );
     }
 
     @Override
