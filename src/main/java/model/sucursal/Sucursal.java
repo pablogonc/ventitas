@@ -17,6 +17,8 @@ import static utilidades.Utilidades.COLOR_CYAN;
 import static utilidades.Utilidades.COLOR_RESET;
 @Data
 public class Sucursal {
+    public List<Producto> articulos; //para testear mientras no esta la nosql
+
     private Integer id;
     private Ubicacion ubicacion;
     private Integer telefono;
@@ -55,24 +57,33 @@ public class Sucursal {
         this.orders = temp.orders;
         eventos = new administradorDeEventos("Todo");
     }
-
+    public void setStock(){ //instancia la sucursal a partir de la que esta en la base de datos
+        sucursalDAO sucursaldao = new sucursalDAO();
+        sucursaldao.setStock(this);
+    }
     public void agregarEncaragado(String articulo,Administrador encargado){ //si dice "todo" controla todo el stock, si no uno en particular
         eventos.suscribir(articulo,encargado);
+        sucursalDAO sucursaldao = new sucursalDAO();
+        sucursaldao.insertEncargado(id,encargado.getSesion().getId(),articulo);
     }
 
     public void eliminarEncaragado(String articulo,Administrador encargado){
         eventos.desuscribir(articulo,encargado);
+        sucursalDAO sucursaldao = new sucursalDAO();
+        sucursaldao.deleteEncargado(id,encargado.getSesion().getId(),articulo);
     }
 
     public void agregarArticulo(Producto item, Integer cantidad){
-
+        sucursalDAO sucursaldao = new sucursalDAO();
        // for (Articulo articulo : item.getArticulos()) {
             if(stock.containsKey(item)){
                 int old = stock.get(item);
                 stock.replace(item, old + cantidad);
+                sucursaldao.updateStock(id,item.getId(),cantidad + old);
             }else{
                 eventos.agregarOperacion(item.getNombre());
                 stock.put(item,cantidad);
+                sucursaldao.insertStock(id,item.getId(),cantidad);
             }
         //}
 
@@ -88,10 +99,11 @@ public class Sucursal {
     }
 
     public void eliminarStock(Producto item, Integer cantidad){
+        sucursalDAO sucursaldao = new sucursalDAO();
         if(stock.containsKey(item)){
             int old = stock.get(item);
             stock.replace(item, old - cantidad);
-
+            sucursaldao.updateStock(id,item.getId(),old-cantidad);
             if (stock.get(item) == 0){
                 eventos.notificar("Todo","stock",item.getNombre(),ubicacion.getDireccion());
                 eventos.notificar(item.getNombre(),"stock",item.getNombre(),ubicacion.getDireccion());

@@ -99,7 +99,8 @@ public class Normal extends Usuario implements Observador {
         float precio =  getSesion().getCarrito().obtenerPrecio();
         float saldo =  getSesion().getSaldo();
         getSesion().setSaldo( (saldo>precio)?saldo-precio:0 );
-
+        UsuarioDAO oUsuario = new UsuarioDAO();
+        oUsuario.updateSaldo(getSesion().getId(),getSesion().getSaldo());
         return  orden;
     }
 

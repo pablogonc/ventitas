@@ -29,6 +29,16 @@ telefono int,
 CONSTRAINT PK_sucursal PRIMARY KEY (idSucursal)
 )ENGINE = InnoDB;
 
+CREATE TABLE encargado(
+idEncargado int auto_increment,
+idSucursal int,
+idUsuario int,
+encargo varchar(100),
+CONSTRAINT PK_encargado PRIMARY KEY (idEncargado),
+CONSTRAINT FK_encargadoSucursal FOREIGN KEY (idSucursal) REFERENCES sucursal(idSucursal),
+CONSTRAINT FK_encargadoUsuario FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario)
+)ENGINE = InnoDB;
+
 CREATE TABLE orden(
 idOrden int auto_increment,
 idScursal int,
@@ -42,7 +52,7 @@ CONSTRAINT FK_orden_comprador FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuar
 )ENGINE = InnoDB;
 
 CREATE TABLE articuloXorden(
-idArticuloXorden int,
+idArticuloXorden int auto_increment,
 idOrden int,
 idArticulo int,
 CONSTRAINT articuloXorden PRIMARY KEY (idOrden),
@@ -50,9 +60,10 @@ CONSTRAINT FK_articuloXorden_orden FOREIGN KEY (idOrden) REFERENCES orden(idOrde
 )ENGINE = InnoDB;
 
 CREATE TABLE articuloXsucursal(
-idArticuloXsucursal int,
+idArticuloXsucursal int auto_increment,
 idSucursal int,
 idArticulo int,
+stock int,
 CONSTRAINT PK_articuloXsucursal PRIMARY KEY (idArticuloXsucursal),
 CONSTRAINT FK_articuloXsucursal_sucursal FOREIGN KEY (idSucursal) REFERENCES sucursal(idSucursal)
 )ENGINE = InnoDB;
@@ -63,7 +74,7 @@ insert into sucursal values
 
 insert into contacto values
 (1,"medrano 2040",4452421,"goncalves.pab@gmail.com","mail"),
-(2,"mozart 2040",44452421,"admin@gmail.com","mail"),
+(2,"mozart 2040",44452421,"goncalves.pab@gmail.com","mail"),
 (3,"medrano 2040",4452421,"goncalves.pab@gmail.com","mail");
 
 insert into usuario values

@@ -2,6 +2,7 @@ import apis.locationService.LocationService;
 import model.order.Order;
 import model.sucursal.Sucursal;
 import model.sucursal.Ubicacion;
+import model.user.Administrador;
 import sesion.Sesion;
 import org.junit.Test;
 
@@ -130,7 +131,7 @@ public class VentitasTests extends Recursos {
     @Test
     public void obtenerSucursal() {
 
-        Sucursal sucursal = new Sucursal("AV Medrano 951") ;
+        Sucursal sucursal = new Sucursal("JONTE 2552") ;
 
         System.out.println("id: " + sucursal.getId());
 
@@ -138,9 +139,53 @@ public class VentitasTests extends Recursos {
     }
     @Test
     public void registrarSucursal() {
-        Sucursal sucursal = new Sucursal(LocationService.getUbicacion("AV Medrano 951"),234) ;
+        iniciarArticulos();
+        Sucursal sucursal = new Sucursal(LocationService.getUbicacion("JONTE 1250"),234) ;
 
         System.out.println("direccion: " + sucursal.getUbicacion().getDireccion());
+        //----Articulos
+        sucursal.agregarArticulo(consola,2);
+        sucursal.agregarArticulo(guitarra,3);
+    }
+
+    @Test
+    public void varios() {
+
+        iniciarArticulos();
+
+        Sucursal sucursal = new Sucursal("JONTE 1250"); // la recupero de la base
+
+        sucursal.articulos= articulos;
+
+        sucursal.setStock();
+
+
+        sucursal.agregarArticulo(tv,2);
+
+        sucursal.mostrarCatalogo();
+
+        // ----admin
+        Sesion sesionAdmin = new Sesion(sucursal);
+
+        sesionAdmin.getUsuario().iniciarSesion("admin","1234");
+
+        sucursal.agregarEncaragado("Todo",(Administrador) sesionAdmin.getUsuario());
+
+        // ----comprador
+        Sesion sesionComprador = new Sesion(sucursal);
+        sesionComprador.getUsuario().iniciarSesion("juan","1234");
+        //
+
+        //.......agregar articulos
+        sesionComprador.addItem(tv,4);
+        sesionComprador.addItem(guitarra,3);
+        //......confirmar
+        Order orden = sesionComprador.getUsuario().confirmarCarrito();
+        orden.asignarVendedor((Administrador) sesionAdmin.getUsuario());
+        orden.showOrder();
+        //........
+        orden.confirmarOrden();
+
     }
 
 }

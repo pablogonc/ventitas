@@ -140,12 +140,7 @@ public class UsuarioDAO {
             }
 
             sesion.setSaldo(rs.getFloat("saldo"));
-            Integer id;
-            ResultSet generatedKeys = stmt.getGeneratedKeys();
-            if (generatedKeys.next())
-                 id = generatedKeys.getInt(1);
-            else
-                id = null;
+            Integer id = rs.getInt("idUsuario");
             sesion.setId(id);
 
             return usuario;
@@ -207,6 +202,26 @@ public class UsuarioDAO {
 
             // handle any errors
             System.out.println("Error en Delete:" + ex);
+
+        }
+    }
+
+    public void updateSaldo(int id,float saldo) {
+        String consulta = "update usuario set saldo ="+ saldo + " WHERE idUsuario =" + id + ";";
+
+        try {
+            this.conn = newConnection();
+
+            // Ejecuci�n
+            PreparedStatement stmt = this.conn.prepareStatement(consulta);
+
+            // execute the preparedstatement
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error en update:" + ex);
 
         }
     }

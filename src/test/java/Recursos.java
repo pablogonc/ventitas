@@ -1,11 +1,15 @@
 import apis.locationService.LocationService;
 import model.item.Articulo;
 import model.item.Combo;
+import model.item.Producto;
 import model.sucursal.Sucursal;
 import model.sucursal.Ubicacion;
 import model.user.Administrador;
 import model.user.Contacto;
 import sesion.Sesion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Recursos {
 
@@ -55,6 +59,9 @@ public class Recursos {
     protected Articulo bajo;
     protected Combo comboBanda;//combo banda = comboguitarrista + bateria + bajo
 
+
+    public List<Producto> articulos; //poner todo aca todos los articulos
+
     //sucursales
     protected Sucursal sucursalMEdrano;
     protected Sucursal sucursalMozart;
@@ -102,6 +109,7 @@ public class Recursos {
     }
 
     public void iniciarArticulos(){
+        articulos = new ArrayList<>();
         tv = new Articulo(1,"Tele 50\"","Philips ","Smart TV Philips 50\" 4K 50PUD6654 posee: Diseño sin bordes, menos marco, escenas más amplias - Bases delgadas y refinadas, transmiten liviandad - Pixel Precise Ultra HD, movimiento fluido y profundidad visible - Compatible con HDR10+ - Dolby Vision y Dolby Atmos, para imagen y sonido cinematográfico - SAPHI, la forma más inteligente de disfrutar de tu televisor - Acceso con un solo botón a un menú de íconos sencillos- Bluetooth para que puedas conectar tus dispositivos compatibles - Colección Philips TV: Netflix, Prime Video y mucho más - Sonido nítido de parlantes de rango completo - Graves potentes.", 72.999f);
         homeTheather = new Articulo(101,"home Theather","Logitech ","Sistema multicanal",40613f);
 
@@ -172,5 +180,9 @@ public class Recursos {
         comboBanda.agregarProducto(bateria);
         comboBanda.agregarProducto(bajo);
 
+        //todo hay que poner todos
+        articulos.add(consola);
+        articulos.add(guitarra);
+        articulos.add(tv);
     }
 }

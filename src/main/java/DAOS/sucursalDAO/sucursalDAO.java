@@ -1,6 +1,7 @@
 package DAOS.sucursalDAO;
 
 import apis.locationService.LocationService;
+import model.item.Producto;
 import model.sucursal.Sucursal;
 import model.sucursal.Ubicacion;
 import model.user.Administrador;
@@ -90,6 +91,116 @@ public class sucursalDAO {
             // handle any errors
             System.out.println("Error," + ex);
             return null;
+        }
+
+    }
+
+    public void setStock(Sucursal sucursal){
+        String consulta = "select * from articuloXsucursal where idSucursal =" +sucursal.getId() +";" ; //todo
+
+        try {
+            this.conn = newConnection();
+
+            // Ejecucion
+            Statement stmt = this.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            while(rs.next()){
+                int id = rs.getInt("idArticulo");
+                Producto articulo = sucursal.articulos.stream().filter(art ->  art.getId()==id).findFirst().orElse(null);
+                sucursal.getEventos().agregarOperacion(articulo.getNombre());
+                sucursal.getStock().put(articulo,rs.getInt("stock"));
+            }
+
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error," + ex);
+
+        }
+    }
+
+    public void updateStock(int idsucursal,int idart,int stock) {
+        String consulta = " update articuloXsucursal set stock= "+ stock +" where idSucursal =" + idsucursal + " and idArticulo="+ idart + ";" ;
+        System.out.println(consulta);
+        try {
+            this.conn = newConnection();
+
+            // Ejecuci�n
+            PreparedStatement stmt = this.conn.prepareStatement(consulta);
+
+            // execute the preparedstatement
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error en update:" + ex);
+
+        }
+
+    }
+
+    public void insertStock(int idsucursal,int idart,int stock) {
+        String consulta = " insert into articuloXsucursal values (null,"+idsucursal +","+ idart +"," + stock +");";
+
+        try {
+
+            this.conn = newConnection();
+
+            // Ejecuci�n
+            PreparedStatement stmt = this.conn.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
+
+            // execute the preparedstatement
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error en Insert");
+        }
+
+    }
+
+    public void insertEncargado(int idsucursal,int iduser,String encargo) {
+        String consulta = " insert into encargado values (null,"+idsucursal +","+ iduser +",'" + encargo +"');";
+
+        try {
+
+            this.conn = newConnection();
+
+            // Ejecuci�n
+            PreparedStatement stmt = this.conn.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
+
+            // execute the preparedstatement
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error en Insert");
+        }
+
+    }
+
+    public void deleteEncargado(int idsucursal,int iduser,String encargo) {
+        String consulta = "delete * from encargado where idSucursal ="+idsucursal  +"and idUsuario="+iduser + " and encargo='"+encargo + "';";
+
+        try {
+
+            this.conn = newConnection();
+
+            // Ejecuci�n
+            PreparedStatement stmt = this.conn.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
+
+            // execute the preparedstatement
+            stmt.execute();
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error en delete");
         }
 
     }
