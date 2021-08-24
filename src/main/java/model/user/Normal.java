@@ -55,19 +55,6 @@ public class Normal extends Usuario implements Observador {
     }
 
     @Override
-    public void cancelarPedido(/*Pedir Pedido*/) {
-        //todo
-        //enviar a sucursal para quitar pedido de la lista
-        //recuperar saldo y restarle comision (podria quedar negativo el saldo lo cual es un incremento para la proxima compra)
-        //mandar mail a admin de cancelacion de pedido
-    }
-
-    @Override
-    public void confirmarPedido() {
-
-    }
-
-    @Override
     public Order getOrden() {
         return getSesion().getOrdenes().get(0);
     }
@@ -103,8 +90,6 @@ public class Normal extends Usuario implements Observador {
         oUsuario.updateSaldo(getSesion().getId(),getSesion().getSaldo());
         return  orden;
     }
-
-
 
     @Override
     public void update(String tipoEvento, String... argumentos) {

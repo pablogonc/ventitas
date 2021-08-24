@@ -46,16 +46,6 @@ public class Administrador extends Usuario implements Observador {
         System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
     }
 
-    @Override
-    public void cancelarPedido() {
-        System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
-    }
-
-    @Override
-    public void confirmarPedido() {
-        System.out.println(COLOR_AMARILLO +"Advertencia: Debe ser usuario normal para realizar esta accion"+ COLOR_RESET);
-    }
-
     public void eliminarUsuario(String nombre) {
         UsuarioDAO oUsuario = new UsuarioDAO();
         oUsuario.eliminar(nombre);

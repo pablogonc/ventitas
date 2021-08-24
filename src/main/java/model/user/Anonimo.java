@@ -67,16 +67,6 @@ public class Anonimo extends Usuario {
     }
 
     @Override
-    public void cancelarPedido() {
-        solicitarInicioDeSesion();
-    }
-
-    @Override
-    public void confirmarPedido() {
-        solicitarInicioDeSesion();
-    }
-
-    @Override
     public void eliminarUsuario(String nombre)  {
         System.out.println(COLOR_ROJO + "Error usted no puede eliminar usuarios" + COLOR_RESET);
     }

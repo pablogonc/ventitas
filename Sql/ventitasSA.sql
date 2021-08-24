@@ -81,10 +81,3 @@ insert into usuario values
 (null,1,"juan","1234",458000,false),
 (null,2,"admin","1234",850,true),
 (null,3,"pablo","1234",1350,false);
-
-
-
-
-
-
-

@@ -27,10 +27,6 @@ public abstract class Usuario {
 
     public abstract void verEstadoPedido();
 
-    public abstract void cancelarPedido();
-
-    public abstract void confirmarPedido();
-
     public abstract Order getOrden();
 
     public abstract void eliminarUsuario(String nombre);
