@@ -33,6 +33,8 @@ public abstract class Usuario {
 
     public abstract void eliminarUsuario(String nombre);
 
+    public abstract void agregarSaldo(float saldo,Usuario usuario);
+
     public abstract void notificar(String mensaje);
 
     public abstract void agregarStock(Sucursal sucursal, Producto producto, Integer cantidad);

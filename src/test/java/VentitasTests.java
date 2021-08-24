@@ -54,6 +54,24 @@ public class VentitasTests extends Recursos {
         sesion.getUsuario().eliminarUsuario("pabloo");
 
     }
+
+    @Test
+    public void agregarSaldo()
+    {
+        iniciarArticulos();
+        iniciarSucursales();
+        Sesion sesion = new Sesion(sucursalMEdrano);
+
+        sesion.getUsuario().iniciarSesion("pablo","1234");
+
+        sesion.getUsuario().verSaldo();
+
+        adminMozrt.agregarSaldo(1350f,sesion.getUsuario());
+
+        sesion.getUsuario().verSaldo();
+
+    }
+
     @Test
     public void verSaldo()
     {
@@ -104,13 +122,18 @@ public class VentitasTests extends Recursos {
 
         sesion.getUsuario().iniciarSesion("pablo","1234");
 
-        sesion.getUsuario().confirmarCarrito();
+        Order orden = sesion.getUsuario().confirmarCarrito();
 
         sesion.getUsuario().verEstadoPedido();
 
-        sesion.getOrdenes().get(0).confirmarOrden();
+        orden.asignarVendedor(adminMozrt);
+        orden.confirmarOrden();
 
-        sesion.getOrdenes().get(0).enviar();
+        sesion.getUsuario().verEstadoPedido();
+
+
+
+        adminMozrt.confirmarEnvio(orden);
 
     }
 
@@ -139,8 +162,7 @@ public class VentitasTests extends Recursos {
 
         orden.confirmarOrden();
 
-
-        sesion.getOrdenes().get(0).enviar();
+        adminMedrano.confirmarEnvio(orden);
     }
 
 

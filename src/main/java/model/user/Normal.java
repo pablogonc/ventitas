@@ -72,6 +72,11 @@ public class Normal extends Usuario implements Observador {
     }
 
     @Override
+    public void agregarSaldo(float saldo,Usuario usuario) {
+        System.out.println(COLOR_ROJO + "Error usted no tiene permiso de agregar saldo" + COLOR_RESET);
+    }
+
+    @Override
     public void notificar(String mensaje) {
         getSesion().getContacto().notificar(mensaje);
     }

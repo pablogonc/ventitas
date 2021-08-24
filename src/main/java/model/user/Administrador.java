@@ -54,6 +54,14 @@ public class Administrador extends Usuario implements Observador {
     }
 
     @Override
+    public void agregarSaldo(float saldo, Usuario usuario) {
+
+        usuario.getSesion().setSaldo( usuario.getSesion().getSaldo() + saldo );
+        UsuarioDAO oUsuario = new UsuarioDAO();
+        oUsuario.updateSaldo(usuario.getSesion().getId(),usuario.getSesion().getSaldo());
+    }
+
+    @Override
     public void notificar(String mensaje) {
         getSesion().getContacto().notificar(mensaje);
     }

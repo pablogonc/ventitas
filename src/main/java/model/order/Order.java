@@ -29,7 +29,7 @@ public class Order  {
     private Float shippingPrice;
     private LocalDateTime fechaPedido;
     private Ubicacion destino;
-    private Boolean confirmado;
+    private Boolean confirmado = false;
     private administradorDeEventos eventos;
     private Sucursal sucursal;
     private float descuento;
@@ -88,7 +88,13 @@ public class Order  {
         System.out.println("Total artículos:    " + COLOR_AZUL + "$" + formatter.format(precio) + COLOR_RESET);
         System.out.println("Descuento:          " + COLOR_VERDE + "$" + formatter.format(descuento) + COLOR_RESET);
         System.out.println("Precio Final:       " + COLOR_ROJO + "$" + formatter.format((precio+shippingPrice-descuento)) + COLOR_RESET);
-        System.out.println("\u001B[0m");
+
+        if (confirmado){
+            System.out.println("Estado:       " + COLOR_VERDE + "Confirmada" + COLOR_RESET);
+        }else{
+            System.out.println("Estado:       " + COLOR_ROJO + "Sin confirmar" + COLOR_RESET);
+        }
+
     }
 
     public void confirmarOrden(){
