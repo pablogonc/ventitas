@@ -1,5 +1,6 @@
 package model.order;
 
+import lombok.Data;
 import model.cart.Cart;
 import model.item.Producto;
 import model.sucursal.Sucursal;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static utilidades.Utilidades.*;
-
+@Data
 public class Order  {
     private Integer id;
     private List<Producto> items;
@@ -39,14 +40,20 @@ public class Order  {
         this.shippingPrice = shippingPrice;
         this.descuento = (precio+shippingPrice-usuario.getSesion().getSaldo())<0?precio+shippingPrice:usuario.getSesion().getSaldo();
         this.destino = usuario.getSesion().getContacto().getUbicacion();
-        DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         this.fechaPedido = LocalDateTime.now();
         this.eventos = new administradorDeEventos("pedido confirmado","pedido en camino");
         this.sucursal = usuario.getSesion().getSucursal();
         this.eventos.suscribir("pedido en camino", usuario);
 
     }
+    public LocalDateTime getDate(){
+        return fechaPedido;
+    }
 
+    public float precioTotal(){
+        return precio + shippingPrice - descuento;
+    }
     public void asignarVendedor(Administrador vendedor){
         this.eventos.suscribir("pedido confirmado",vendedor);
     }

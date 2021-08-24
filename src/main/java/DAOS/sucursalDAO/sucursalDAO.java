@@ -134,7 +134,7 @@ public class sucursalDAO {
             while(rs.next()){
                 Sesion sesion = new Sesion(sucursal);
                 sesion.getUsuario().iniciarSesion(rs.getString("nombreUsuario"),rs.getString("contrasenia")); //todo cambiar por un instanciador que no inicie la sesion
-                sucursal.agregarEncaragado(rs.getString("encargo"),(Administrador)  sesion.getUsuario());
+                sucursal.getEventos().suscribir(rs.getString("encargo"),(Administrador)  sesion.getUsuario());
             }
 
 

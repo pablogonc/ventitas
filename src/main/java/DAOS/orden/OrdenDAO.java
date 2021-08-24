@@ -1,6 +1,12 @@
 package DAOS.orden;
 
+import model.item.Producto;
+
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class OrdenDAO {
     private Connection conn;
@@ -27,9 +33,11 @@ public class OrdenDAO {
         }
     }
 
-    public int registrarOrden(Integer idUsuario,Integer idSucursal, float precioEnvio, Date fechaPedido, Boolean confirmado) {
+    public int registrarOrden(Integer idUsuario, Integer idSucursal, float precioEnvio, LocalDateTime fechaPedido, List<Producto> articulos) {
 
-        String consulta = "insert into orden values (null,"+idSucursal  +",'" + idUsuario + "','" + precioEnvio + "','" + fechaPedido + "','" + confirmado + ";" ;
+        String consulta = "insert into orden values (null,"+idUsuario  +"," + idSucursal + "," + precioEnvio + ",'" + fechaPedido + "',false);" ;
+
+
 
         try {
 
@@ -41,12 +49,22 @@ public class OrdenDAO {
 
             // obtener ultimo id generado
             ResultSet generatedKeys = stmt.getGeneratedKeys();
-            if (generatedKeys.next())
-                return generatedKeys.getInt(1);
-            else
+            int id;
+            if (generatedKeys.next()) {
+                 id = generatedKeys.getInt(1);
+            }else {
                 return 0;
+            }
 
+            List<Producto> temps = new ArrayList<>(
+                    new HashSet<>(articulos));
 
+                for (Producto articulo : temps) {
+                    consulta = "insert into articuloXorden values (null,"+ id +","+articulo.getId() +");";
+                    stmt = this.conn.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
+                    stmt.executeUpdate();
+            }
+            return id;
         } catch (SQLException ex) {
 
             // handle any errors

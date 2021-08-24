@@ -74,11 +74,11 @@ public class Recursos {
         Ubicacion medrano= new Ubicacion("Av. Medrano 951, C1179 AAQ, Buenos Aires",-34.59859412721525d ,-58.41992119079607d );
 
         Sesion sesiona= new Sesion(null);
-        Contacto c= new Contacto("adminMedrano", LocationService.getUbicacion("medrano 1251"),424225,"goncalves.pab@gmail.com","mail");
-        adminMedrano = new Administrador(sesiona);
-        sesiona.setUsuario(adminMedrano);
-        sesiona.setContacto(c);
-        sucursalMEdrano = new Sucursal(1,medrano ,1148677500);
+
+        sesiona.getUsuario().iniciarSesion("adminMedrano","1234");
+        adminMedrano = (Administrador) sesiona.getUsuario();
+
+        sucursalMEdrano = new Sucursal(medrano.getDireccion());
         sucursalMEdrano.agregarEncaragado("Todo",adminMedrano);
         sucursalMEdrano.agregarArticulo(consola,4);
 
@@ -95,14 +95,12 @@ public class Recursos {
 
 
         Sesion sesionb= new Sesion(null);
-        Contacto c2= new Contacto("adminMozart", LocationService.getUbicacion("medrano 1251"),1169710820,"stevenhca12@gmail.com","mail");
-        adminMozrt = new Administrador(sesionb);
-        sesionb.setUsuario(adminMozrt);
-        sesionb.setContacto(c2);
 
+        sesionb.getUsuario().iniciarSesion("adminMozart","1234");
+        adminMozrt = (Administrador) sesionb.getUsuario();
 
         Ubicacion mozart = new Ubicacion("Mozart 2300, C1407 CABA",-34.65927096597888d ,-58.4673399745992d );
-        sucursalMozart = new Sucursal(2,mozart,1148677500);
+        sucursalMozart = new Sucursal(mozart.getDireccion());
         sucursalMozart.agregarEncaragado("Todo",adminMozrt);
         sesionb.setSucursal(sucursalMozart);
         sucursalMEdrano.agregarEncaragado(consola.getNombre(),adminMozrt);

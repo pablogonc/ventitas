@@ -41,13 +41,13 @@ CONSTRAINT FK_encargadoUsuario FOREIGN KEY (idUsuario) REFERENCES usuario(idUsua
 
 CREATE TABLE orden(
 idOrden int auto_increment,
-idScursal int,
 idUsuario int,
-precioEnvio float,
+idSucursal int,
+precioTotal float,
 fechaPedido date,
 confirmado boolean,
 CONSTRAINT PK_orden PRIMARY KEY (idOrden),
-CONSTRAINT FK_orden_sucursal FOREIGN KEY (idScursal) REFERENCES sucursal(idSucursal),
+CONSTRAINT FK_orden_sucursal FOREIGN KEY (idSucursal) REFERENCES sucursal(idSucursal),
 CONSTRAINT FK_orden_comprador FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario)
 )ENGINE = InnoDB;
 
@@ -69,15 +69,17 @@ CONSTRAINT FK_articuloXsucursal_sucursal FOREIGN KEY (idSucursal) REFERENCES suc
 )ENGINE = InnoDB;
 
 insert into sucursal values
-(1,"Av. Medrano 951, C1179 AAQ, Buenos Aires",4452421),
-(2,"Mozart 2300, C1407 CABA",4452421);
+(1,"Avenida Medrano 951, 1179 Ciudad de Buenos Aires, Argentina",1148677500),
+(2,"Mozart 2256, 1407 Ciudad de Buenos Aires, Argentina",4452421);
 
 insert into contacto values
-(1,"medrano 2040",4452421,"goncalves.pab@gmail.com","mail"),
+(1,"medrano 2040",4452421,"stevenhca12@gmail.com","mail"),
 (2,"mozart 2040",44452421,"goncalves.pab@gmail.com","mail"),
 (3,"medrano 2040",4452421,"goncalves.pab@gmail.com","mail");
 
 insert into usuario values
+(null,1,"adminMozart","1234",458000,true),
+(null,2,"adminMedrano","1234",850,true),
 (null,1,"juan","1234",458000,false),
 (null,2,"admin","1234",850,true),
 (null,3,"pablo","1234",1350,false);

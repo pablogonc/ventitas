@@ -128,15 +128,7 @@ public class VentitasTests extends Recursos {
         sesion.getOrdenes().get(0).enviar();
     }
 
-    @Test
-    public void obtenerSucursal() {
 
-        Sucursal sucursal = new Sucursal("JONTE 2552") ;
-
-        System.out.println("id: " + sucursal.getId());
-
-
-    }
     @Test
     public void registrarSucursal() {
         iniciarArticulos();
@@ -144,16 +136,25 @@ public class VentitasTests extends Recursos {
 
         System.out.println("direccion: " + sucursal.getUbicacion().getDireccion());
         //----Articulos
-        sucursal.agregarArticulo(consola,2);
+        sucursal.agregarArticulo(consola,5);
         sucursal.agregarArticulo(guitarra,3);
-
+        sucursal.agregarArticulo(mouse,3);
+        sucursal.agregarArticulo(teclado,3);
         Sesion admin = new Sesion(sucursal);
 
         admin.getUsuario().iniciarSesion("admin","1234");
 
         sucursal.agregarEncaragado("Todo",(Administrador) admin.getUsuario());
     }
+    @Test
+    public void obtenerSucursal() {
 
+        Sucursal sucursal = new Sucursal("AV jonte 5250") ;
+
+        System.out.println("id: " + sucursal.getId());
+
+
+    }
     @Test
     public void varios() {
 
@@ -181,6 +182,8 @@ public class VentitasTests extends Recursos {
         //.......agregar articulos
         sesionComprador.addItem(consola,2);
         sesionComprador.addItem(guitarra,1);
+        sesionComprador.addItem(teclado,1);
+        sesionComprador.addItem(mouse,1);
         //......confirmar
         Order orden = sesionComprador.getUsuario().confirmarCarrito();
         orden.asignarVendedor((Administrador) sesionAdmin.getUsuario());

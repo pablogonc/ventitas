@@ -1,6 +1,7 @@
 package model.user;
 
 
+import DAOS.orden.OrdenDAO;
 import model.sucursal.Ubicacion;
 import sistema.Observador;
 import DAOS.userDAO.UsuarioDAO;
@@ -12,8 +13,6 @@ import static utilidades.Utilidades.*;
 
 public class Normal extends Usuario implements Observador {
 
-
-    private String[] argumentos;
 
     public Normal(Sesion sesion) {
         super(sesion);
@@ -82,12 +81,19 @@ public class Normal extends Usuario implements Observador {
         float precioEnvio = getSesion().getSucursal().getPrecioEnvio(destino);
 
         Order orden = getSesion().getCarrito().confirmarCarrito(this,precioEnvio);
-        getSesion().addOrden(orden); //todo ¿registrar en base?
+        getSesion().addOrden(orden);
         float precio =  getSesion().getCarrito().obtenerPrecio();
         float saldo =  getSesion().getSaldo();
         getSesion().setSaldo( (saldo>precio)?saldo-precio:0 );
         UsuarioDAO oUsuario = new UsuarioDAO();
         oUsuario.updateSaldo(getSesion().getId(),getSesion().getSaldo());
+
+        OrdenDAO ordendao = new OrdenDAO();
+        ordendao.registrarOrden(getSesion().getId(),
+                getSesion().getSucursal().getId(),
+                orden.precioTotal(),
+                orden.getDate(),
+                orden.getItems());
         return  orden;
     }
 
