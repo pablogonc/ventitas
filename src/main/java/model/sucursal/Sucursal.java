@@ -56,10 +56,15 @@ public class Sucursal {
         this.stock = temp.getStock();
         this.orders = temp.orders;
         eventos = new administradorDeEventos("Todo");
+
     }
     public void setStock(){ //instancia la sucursal a partir de la que esta en la base de datos
         sucursalDAO sucursaldao = new sucursalDAO();
         sucursaldao.setStock(this);
+    }
+    public void setEncargados() {
+        sucursalDAO sucursaldao = new sucursalDAO();
+        sucursaldao.setEncargados(this);
     }
     public void agregarEncaragado(String articulo,Administrador encargado){ //si dice "todo" controla todo el stock, si no uno en particular
         eventos.suscribir(articulo,encargado);
@@ -140,4 +145,6 @@ public class Sucursal {
             return false;
         }
     }
+
+
 }

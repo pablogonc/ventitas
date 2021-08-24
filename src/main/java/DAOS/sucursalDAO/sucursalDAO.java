@@ -121,6 +121,31 @@ public class sucursalDAO {
         }
     }
 
+    public void setEncargados(Sucursal sucursal){
+        String consulta = "select * from encargado E, usuario U where E.idUsuario= U.idUsuario and idSucursal =" +sucursal.getId() +";" ; //todo
+
+        try {
+            this.conn = newConnection();
+
+            // Ejecucion
+            Statement stmt = this.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(consulta);
+
+            while(rs.next()){
+                Sesion sesion = new Sesion(sucursal);
+                sesion.getUsuario().iniciarSesion(rs.getString("nombreUsuario"),rs.getString("contrasenia")); //todo cambiar por un instanciador que no inicie la sesion
+                sucursal.agregarEncaragado(rs.getString("encargo"),(Administrador)  sesion.getUsuario());
+            }
+
+
+        } catch (SQLException ex) {
+
+            // handle any errors
+            System.out.println("Error," + ex);
+
+        }
+    }
+
     public void updateStock(int idsucursal,int idart,int stock) {
         String consulta = " update articuloXsucursal set stock= "+ stock +" where idSucursal =" + idsucursal + " and idArticulo="+ idart + ";" ;
 

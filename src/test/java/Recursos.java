@@ -166,7 +166,7 @@ public class Recursos {
         comboInputPC.agregarProducto(pcEscritorio);
         comboInputPC.agregarProducto(auricular);
 
-        guitarra = new Articulo(14,"Guitarra ","Stratocaster ","suena",14999f);
+        guitarra = new Articulo(202,"Guitarra ","Stratocaster ","suena",14999f);
         amplificador = new Articulo(15,"Amplificador ","Ross ","amplifica sonido",7800f);
 
         comboGuitarrista =  new Combo(109,"Combo Guitarrista",5);//comboguitarrista = guitarra+ amplificador

@@ -140,12 +140,18 @@ public class VentitasTests extends Recursos {
     @Test
     public void registrarSucursal() {
         iniciarArticulos();
-        Sucursal sucursal = new Sucursal(LocationService.getUbicacion("JONTE 1250"),234) ;
+        Sucursal sucursal = new Sucursal(LocationService.getUbicacion("AV jonte 5250"),234) ;
 
         System.out.println("direccion: " + sucursal.getUbicacion().getDireccion());
         //----Articulos
         sucursal.agregarArticulo(consola,2);
         sucursal.agregarArticulo(guitarra,3);
+
+        Sesion admin = new Sesion(sucursal);
+
+        admin.getUsuario().iniciarSesion("admin","1234");
+
+        sucursal.agregarEncaragado("Todo",(Administrador) admin.getUsuario());
     }
 
     @Test
@@ -153,14 +159,11 @@ public class VentitasTests extends Recursos {
 
         iniciarArticulos();
 
-        Sucursal sucursal = new Sucursal("JONTE 1250"); // la recupero de la base
+        Sucursal sucursal = new Sucursal("AV jonte 5250"); // la recupero de la base
 
         sucursal.articulos= articulos;
-
         sucursal.setStock();
-
-
-        sucursal.agregarArticulo(tv,2);
+        sucursal.setEncargados();
 
         sucursal.mostrarCatalogo();
 
@@ -169,7 +172,6 @@ public class VentitasTests extends Recursos {
 
         sesionAdmin.getUsuario().iniciarSesion("admin","1234");
 
-        sucursal.agregarEncaragado("Todo",(Administrador) sesionAdmin.getUsuario());
 
         // ----comprador
         Sesion sesionComprador = new Sesion(sucursal);
@@ -177,8 +179,8 @@ public class VentitasTests extends Recursos {
         //
 
         //.......agregar articulos
-        sesionComprador.addItem(tv,4);
-        sesionComprador.addItem(guitarra,3);
+        sesionComprador.addItem(consola,2);
+        sesionComprador.addItem(guitarra,1);
         //......confirmar
         Order orden = sesionComprador.getUsuario().confirmarCarrito();
         orden.asignarVendedor((Administrador) sesionAdmin.getUsuario());
