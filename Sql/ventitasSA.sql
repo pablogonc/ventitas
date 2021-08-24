@@ -55,7 +55,7 @@ CREATE TABLE articuloXorden(
 idArticuloXorden int auto_increment,
 idOrden int,
 idArticulo int,
-CONSTRAINT articuloXorden PRIMARY KEY (idOrden),
+CONSTRAINT articuloXorden PRIMARY KEY (idArticuloXorden),
 CONSTRAINT FK_articuloXorden_orden FOREIGN KEY (idOrden) REFERENCES orden(idOrden)
 )ENGINE = InnoDB;
 
