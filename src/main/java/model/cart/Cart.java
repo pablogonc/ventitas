@@ -1,16 +1,18 @@
 package model.cart;
 
-import model.item.Item;
-import model.item.Precio;
+import model.item.Producto;
 import model.order.Order;
+import model.sucursal.Ubicacion;
+import model.user.Normal;
+import model.user.Usuario;
 
 import java.util.*;
 
-public class Cart implements Precio {
+public class Cart {
 
-    private final List<Precio> items;
+    private final List<Producto> items;
 
-    public  List<Precio> getItems() {
+    public  List<Producto> getItems() {
         return items;
     }
 
@@ -43,36 +45,35 @@ public class Cart implements Precio {
         System.out.println("\u001B[0m");
     }*/
 
-    public void addItem(Precio item,int cantidad){
+    public void addItem(Producto item,int cantidad){
         for(int i =0; i<cantidad ; i++){
             items.add(item);
         }
 
     }
 
-    public void deleteItem(Precio item){
+    public void deleteItem(Producto item){
 
         items.remove(item);
     }
 
-    public Order confirmarCarrito(Float shippingPrice){
-        return new Order(this,shippingPrice);
+    public Order confirmarCarrito(Usuario usuario,Float shippingPrice){
+        return new Order((Normal) usuario, this,shippingPrice);
     }
 
-    @Override
+
     public float obtenerPrecio() {
         float retorno = 0;
-        for (Precio item : items) {
-            retorno += item.obtenerPrecio();
+        for (Producto item : items) {
+            retorno += item.getPrecio();
         }
         return retorno;
     }
 
-    @Override
-    public List<Item> obtenerItems() {
-        List<Item> listItems = new ArrayList<>();
-        for (Precio item : items) {
-            listItems.addAll(item.obtenerItems());
+    public List<Producto> obtenerItems() {
+        List<Producto> listItems = new ArrayList<>();
+        for (Producto item : items) {
+            listItems.addAll(item.getArticulos());
         }
         return listItems;
     }
