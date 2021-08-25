@@ -3,6 +3,7 @@ import model.order.Order;
 import model.sucursal.Sucursal;
 import model.sucursal.Ubicacion;
 import model.user.Administrador;
+import model.user.Usuario;
 import sesion.Sesion;
 import org.junit.Test;
 
@@ -15,7 +16,7 @@ public class VentitasTests extends Recursos {
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
 
-        sesion.getUsuario().registrarse("pabloo","123","jonte 2551",455528542,"goncalves.pab@gmail.com","mail");
+        sesion.getUsuario().registrarse("UsuarioNormal","123","jonte 2551",455528542,"goncalves.pab@gmail.com","mail");
 
 
     }
@@ -31,6 +32,77 @@ public class VentitasTests extends Recursos {
 
 
     }
+
+    @Test
+    public void agregarSaldo()
+    {
+        iniciarArticulos();
+        iniciarSucursales();
+        Sesion sesionAdmin = new Sesion(sucursalMEdrano);
+        sesionAdmin.getUsuario().iniciarSesion("adminNuevo","123");
+        Usuario admin = sesionAdmin.getUsuario();
+
+        Sesion sesion = new Sesion(sucursalMEdrano);
+        sesion.getUsuario().iniciarSesion("UsuarioNormal","123");
+
+        sesion.getUsuario().verSaldo();
+
+        admin.agregarSaldo(1350f,sesion.getUsuario());
+
+        sesion.getUsuario().verSaldo();
+
+    }
+
+
+
+    @Test
+    public void agotarStock() {
+
+        iniciarArticulos();
+        iniciarSucursales();
+
+        Sesion sesion = new Sesion(sucursalMEdrano);
+
+        //sesion.getSucursal().mostrarCatalogo();
+
+        sesion.addItem(consola,4); //se agota de una
+        sesion.addItem(tv,2); //no se agota
+        sesion.addItem(homeTheather,5); //quedan otras 5
+        sesion.addItem(homeTheather,5); // se agota
+        sesion.addItem(controlConsola,2); // ya no habia stock suficiente en sucursal
+
+        sesion.getUsuario().iniciarSesion("UsuarioNormal","123");
+        sesion.getUsuario().verSaldo();
+        Order orden = sesion.getUsuario().confirmarCarrito();
+        orden.asignarVendedor(adminMedrano);
+        sesion.getUsuario().verSaldo();
+        sesion.getUsuario().verEstadoPedido();
+
+        orden.confirmarOrden();
+
+        adminMedrano.confirmarEnvio(orden);
+        System.out.println("--------------------");
+        System.out.println("--------------------");
+        System.out.println("--------------------");
+        sesion.getUsuario().verEstadoPedido();
+    }
+
+
+
+    @Test
+    public void verSaldo()
+    {
+        iniciarArticulos();
+        iniciarSucursales();
+        Sesion sesion = new Sesion(sucursalMEdrano);
+
+        sesion.getUsuario().iniciarSesion("UsuarioNormal","123");
+
+        sesion.getUsuario().verSaldo();
+
+    }
+
+
     @Test
     public void IniciarSesion()
     {
@@ -38,8 +110,7 @@ public class VentitasTests extends Recursos {
         iniciarSucursales();
         Sesion sesion = new Sesion(sucursalMEdrano);
 
-        sesion.getUsuario().iniciarSesion("pabloo","123");
-        sesion.getUsuario().notificar("hola");
+        sesion.getUsuario().iniciarSesion("UsuarioNormal","123");
     }
 
     @Test
@@ -55,35 +126,9 @@ public class VentitasTests extends Recursos {
 
     }
 
-    @Test
-    public void agregarSaldo()
-    {
-        iniciarArticulos();
-        iniciarSucursales();
-        Sesion sesion = new Sesion(sucursalMEdrano);
 
-        sesion.getUsuario().iniciarSesion("pablo","1234");
 
-        sesion.getUsuario().verSaldo();
 
-        adminMozrt.agregarSaldo(1350f,sesion.getUsuario());
-
-        sesion.getUsuario().verSaldo();
-
-    }
-
-    @Test
-    public void verSaldo()
-    {
-        iniciarArticulos();
-        iniciarSucursales();
-        Sesion sesion = new Sesion(sucursalMEdrano);
-
-        sesion.getUsuario().iniciarSesion("admin","1234");
-
-        sesion.getUsuario().verSaldo();
-
-    }
 
 
     @Test
@@ -137,33 +182,6 @@ public class VentitasTests extends Recursos {
 
     }
 
-    @Test
-    public void agotarStock() {
-
-        iniciarArticulos();
-        iniciarSucursales();
-
-        Sesion sesion = new Sesion(sucursalMEdrano);
-
-        //sesion.getSucursal().mostrarCatalogo();
-
-        sesion.addItem(consola,4); //se agota de una
-        sesion.addItem(tv,2); //no se agota
-        sesion.addItem(homeTheather,5); //quedan otras 5
-        sesion.addItem(homeTheather,5); // se agota
-        sesion.addItem(controlConsola,2); // ya no habia stock suficiente en sucursal
-
-        sesion.getUsuario().iniciarSesion("juan","1234");
-        sesion.getUsuario().verSaldo();
-        Order orden = sesion.getUsuario().confirmarCarrito();
-        orden.asignarVendedor(adminMedrano);
-        sesion.getUsuario().verSaldo();
-        sesion.getUsuario().verEstadoPedido();
-
-        orden.confirmarOrden();
-
-        adminMedrano.confirmarEnvio(orden);
-    }
 
 
     @Test
@@ -193,7 +211,7 @@ public class VentitasTests extends Recursos {
 
     }
     @Test
-    public void varios() {
+    public void varios() { //recupera sucursal , a un admin,  comprador,  agrega articulos
 
         iniciarArticulos();
 
