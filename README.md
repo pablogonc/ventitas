@@ -3,7 +3,7 @@
 
 Integrantes:
 Pablo Goncalves
-Legajo:
+Legajo:172.458.7
 Steven Huang
 Legajo: 172.449-6
 
