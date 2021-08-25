@@ -1,7 +1,7 @@
 # TP Diseño de Sistemas UTN
 ## Ventitas SA
 
-Integrantes:
+Integrantes:<br />
 Pablo Goncalves
 Legajo:172.458.7<br />
 Steven Huang
